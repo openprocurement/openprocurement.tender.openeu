@@ -11,7 +11,6 @@ from openprocurement.api.models import (Model, Address, Period,
                                         IsoDateTimeType, ListType)
 from openprocurement.api.models import Tender as BaseTender
 from openprocurement.api.models import Identifier as BaseIdentifier
-from openprocurement.api.models import Item as BaseItem
 from openprocurement.api.models import Bid as BaseBid
 from openprocurement.api.models import Contract as BaseContract
 from openprocurement.api.models import Cancellation as BaseCancellation
@@ -38,6 +37,7 @@ from openprocurement.tender.openua.models import Complaint as BaseComplaint
 from openprocurement.tender.openua.models import (
     PeriodStartEndRequired, SifterListType, COMPLAINT_SUBMIT_TIME,
 )
+from openprocurement.tender.openua.models import Item as BaseItem
 
 eu_role = blacklist('enquiryPeriod', 'qualifications')
 edit_role_eu = edit_role + eu_role
