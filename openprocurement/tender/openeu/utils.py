@@ -67,16 +67,19 @@ def prepare_qualifications(request, bids=[], lotId=None):
                         if lotId:
                             if lotValue.relatedLot == lotId:
                                 qualification = Qualification({'bidID': bid.id, 'status': 'pending', 'lotID': lotId})
+                                qualification.date = get_now()
                                 tender.qualifications.append(qualification)
                                 new_qualifications.append(qualification.id)
                         else:
                             qualification = Qualification({'bidID': bid.id, 'status': 'pending', 'lotID': lotValue.relatedLot})
+                            qualification.date = get_now()
                             tender.qualifications.append(qualification)
                             new_qualifications.append(qualification.id)
     else:
         for bid in bids:
             if bid.status == 'pending':
                 qualification = Qualification({'bidID': bid.id, 'status': 'pending'})
+                qualification.date = get_now()
                 tender.qualifications.append(qualification)
                 new_qualifications.append(qualification.id)
     return new_qualifications
@@ -232,6 +235,7 @@ def add_next_award(request):
                     'bid_id': bid['id'],
                     'lotID': lot.id,
                     'status': 'pending',
+                    'date': get_now(),
                     'value': bid['value'],
                     'suppliers': bid['tenderers'],
                     'complaintPeriod': {
@@ -259,6 +263,7 @@ def add_next_award(request):
                 award = tender.__class__.awards.model_class({
                     'bid_id': bid['id'],
                     'status': 'pending',
+                    'date': get_now(),
                     'value': bid['value'],
                     'suppliers': bid['tenderers'],
                     'complaintPeriod': {
