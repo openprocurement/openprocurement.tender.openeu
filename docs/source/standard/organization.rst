@@ -29,6 +29,8 @@ Schema
     :ref:`Address`, required
 :contactPoint:
     :ref:`ContactPoint`, required
+:additionalContactPoints:
+    List of :ref:`ContactPoint` objects
 
 
 .. index:: Company, id
