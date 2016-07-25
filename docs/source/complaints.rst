@@ -48,8 +48,8 @@ Tender Conditions Claims/Complaints
 
     complaints-tender
 
-Tender Qualification Complaints
--------------------------------
+Tender Qualification Claims/Complaints
+--------------------------------------
 
 .. graphviz::
 
@@ -58,9 +58,15 @@ Tender Qualification Complaints
             label = "complaint";
             pending; accepted; stopping; satisfied;
         }
+        subgraph cluster_claim {
+            label = "claim";
+            claim; answered;
+        }
+        claim -> answered;
         satisfied -> resolved;
         edge[style=dashed];
-        draft -> {pending,cancelled}; 
+        draft -> {claim,pending};
+        {draft,claim,answered} -> cancelled;
         {pending,accepted} -> stopping;
         edge[style=bold];
         pending -> {accepted,invalid};
@@ -73,7 +79,7 @@ Tender Qualification Complaints
 
     complaints-qualification
 
-Tender Award Complaints
+Tender Award Claims/Complaints
 ------------------------------
 
 .. graphviz::
@@ -83,9 +89,15 @@ Tender Award Complaints
             label = "complaint";
             pending; accepted; stopping; satisfied;
         }
+        subgraph cluster_claim {
+            label = "claim";
+            claim; answered;
+        }
+        claim -> answered;
         satisfied -> resolved;
         edge[style=dashed];
-        draft -> {pending,cancelled}; 
+        draft -> {claim,pending};
+        {draft,claim,answered} -> cancelled;
         {pending,accepted} -> stopping;
         edge[style=bold];
         pending -> {accepted,invalid};
