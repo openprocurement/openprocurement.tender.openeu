@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from openprocurement.api.tests.base import test_lots
 from openprocurement.tender.openeu.tests.base import (BaseTenderContentWebTest,
     test_bids, test_lots)
 
