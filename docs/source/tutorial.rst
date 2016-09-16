@@ -1,7 +1,6 @@
 .. _tutorial:
 
 Tutorial
-========
 
 Exploring basic rules
 ---------------------
@@ -180,7 +179,7 @@ Bidder can register a bid with ``draft`` status:
 .. include:: tutorial/register-bidder.http
    :code:
 
-and then approve bid by changing status to ``pending``:
+and approve to ``pending`` status:
 
 .. include:: tutorial/activate-bidder.http
    :code:
@@ -335,7 +334,9 @@ Procuring entity approves qualifications by switching to next status:
 .. include:: tutorial/pre-qualification-confirmation.http
    :code:
 
-You may notice 10 day stand-still time set in `qualificationPeriod`.
+If qualification has been cancelled, new `Qualification` object is generated for this participant.
+
+.. You may notice 10 day stand-still time set in `qualificationPeriod`.
 
 Auction
 -------

@@ -1,10 +1,11 @@
 #
+# Zoriana Zaiats <sorenabell@quintagroup.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: openprocurement.tender.openeu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-16 12:53+0200\n"
-"PO-Revision-Date: 2016-04-15 14:38+0300\n"
+"PO-Revision-Date: 2016-09-16 12:53+0200\n"
 "Last-Translator: Zoriana Zaiats <sorenabell@quintagroup.com>\n"
 "Language-Team: Ukrainian <support@quintagroup.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: ../../source/standard/tender.rst:8
 msgid "Tender"
@@ -98,13 +99,6 @@ msgstr ""
 msgid ":ref:`value`, required"
 msgstr ":ref:`value`, обов’язково"
 
-#: ../../source/standard/tender.rst:53
-msgid ""
-"Total available tender budget. Bids greater then ``value`` will be rejected."
-msgstr ""
-"Повний доступний бюджет закупівлі. Пропозиції, що більші за ``value`` будуть"
-" відхилені."
-
 #: ../../source/standard/tender.rst:55
 msgid "|ocdsDescription| The total estimated value of the procurement."
 msgstr "|ocdsDescription| Загальна кошторисна вартість закупівлі."
@@ -182,10 +176,6 @@ msgstr ""
 #: ../../source/standard/tender.rst:103
 msgid "The minimal step of auction (reduction). Validation rules:"
 msgstr "Мінімальний крок аукціону (редукціону). Правила валідації:"
-
-#: ../../source/standard/tender.rst:105
-msgid "`amount` should be less then `Tender.value.amount`"
-msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
 
 #: ../../source/standard/tender.rst:106
 msgid "`currency` should either be absent or match `Tender.value.currency`"
@@ -405,3 +395,22 @@ msgstr "Забезпечення тендерних пропозицій"
 msgid ":ref:`ProcuringEntity`, required"
 msgstr ":ref:`ProcuringEntity`, обов’язково"
 
+#: ../../source/standard/tender.rst:53
+msgid ""
+"Total available tender budget. Bids greater than ``value`` will be rejected."
+msgstr ""
+"Повний доступний бюджет аукціону. Пропозиції, що менші за ``value`` "
+"будуть відхилені."
+
+#: ../../source/standard/tender.rst:105
+msgid "`amount` should be less than `Tender.value.amount`"
+msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
+
+#~ msgid ""
+#~ "Total available tender budget. Bids greater then ``value`` will be rejected."
+#~ msgstr ""
+#~ "Повний доступний бюджет закупівлі. Пропозиції, що більші за ``value`` будуть"
+#~ " відхилені."
+
+#~ msgid "`amount` should be less then `Tender.value.amount`"
+#~ msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
