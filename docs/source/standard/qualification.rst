@@ -60,10 +60,10 @@ Schema
 
     Possible values are:
 
-    * `pending`
-    * `active`
-    * `unsuccessful`
-    * `cancelled`
+    * `pending` - waiting for qualification
+    * `active` - qualification has been confirmed
+    * `unsuccessful` - participant didn't pass qualification
+    * `cancelled`- qualification decision has been cancelled
 
 Workflow
 --------
