@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: openprocurement.tender.openeu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-16 12:53+0200\n"
-"PO-Revision-Date: 2016-09-22 12:30+0200\n"
+"PO-Revision-Date: 2016-09-22 14:05+0200\n"
 "Last-Translator: Zoriana Zaiats <sorenabell@quintagroup.com>\n"
 "Language-Team: Ukrainian <support@quintagroup.com>\n"
 "MIME-Version: 1.0\n"
@@ -394,17 +394,6 @@ msgstr "Забезпечення тендерних пропозицій"
 msgid ":ref:`ProcuringEntity`, required"
 msgstr ":ref:`ProcuringEntity`, обов’язково"
 
-#: ../../source/standard/tender.rst:53
-msgid ""
-"Total available tender budget. Bids greater than ``value`` will be rejected."
-msgstr ""
-"Повний доступний бюджет аукціону. Пропозиції, що менші за ``value`` будуть "
-"відхилені."
-
-#: ../../source/standard/tender.rst:105
-msgid "`amount` should be less than `Tender.value.amount`"
-msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
-
 #: ../../source/standard/tender.rst:125
 msgid "`enquiryPeriod` has additional fields:"
 msgstr "`enquiryPeriod` має додаткові поля:"
@@ -424,8 +413,29 @@ msgid ""
 "``clarificationsUntil`` - time before which answers for questions and claims"
 " can be provided. After this time the procedure will be blocked."
 msgstr ""
-"``clarificationsUntil``- час, до якого можна давати відповіді на запитання та"
-" вимоги, після якого блокується процедура."
+"``clarificationsUntil``- час, до якого можна давати відповіді на запитання "
+"та вимоги, після якого блокується процедура."
+
+#: ../../source/standard/tender.rst:53
+msgid ""
+"Total available tender budget. Bids that are greater than ``value`` will be "
+"rejected."
+msgstr ""
+"Повний доступний бюджет аукціону. Пропозиції, що менші за ``value`` "
+"будуть відхилені."
+
+#: ../../source/standard/tender.rst:105
+msgid "`amount` value should be less than `Tender.value.amount`"
+msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
+
+#~ msgid ""
+#~ "Total available tender budget. Bids greater than ``value`` will be rejected."
+#~ msgstr ""
+#~ "Повний доступний бюджет аукціону. Пропозиції, що менші за ``value`` будуть "
+#~ "відхилені."
+
+#~ msgid "`amount` should be less than `Tender.value.amount`"
+#~ msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
 
 #~ msgid ""
 #~ "``clarificationsUntil`` - time before which answers for questions and "
