@@ -50,7 +50,7 @@ Schema
 :value:
    :ref:`value`, required
 
-   Total available tender budget. Bids greater than ``value`` will be rejected.
+   Total available tender budget. Bids that are greater than ``value`` will be rejected.
 
    |ocdsDescription|
    The total estimated value of the procurement.
@@ -102,7 +102,7 @@ Schema
 
    The minimal step of auction (reduction). Validation rules:
 
-   * `amount` should be less than `Tender.value.amount`
+   * `amount` value should be less than `Tender.value.amount`
    * `currency` should either be absent or match `Tender.value.currency`
    * `valueAddedTaxIncluded` should either be absent or match `Tender.value.valueAddedTaxIncluded`
 
