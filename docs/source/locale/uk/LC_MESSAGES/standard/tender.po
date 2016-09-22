@@ -1,11 +1,10 @@
-#
 # Zoriana Zaiats <sorenabell@quintagroup.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: openprocurement.tender.openeu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-16 12:53+0200\n"
-"PO-Revision-Date: 2016-09-16 12:53+0200\n"
+"PO-Revision-Date: 2016-09-22 12:30+0200\n"
 "Last-Translator: Zoriana Zaiats <sorenabell@quintagroup.com>\n"
 "Language-Team: Ukrainian <support@quintagroup.com>\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +74,7 @@ msgstr ""
 "|ocdsDescription| Ідентифікатор тендера TenderID повинен завжди співпадати з"
 " OCID. Його включають, щоб зробити структуру даних більш зручною."
 
-#: ../../source/standard/tender.rst:38 ../../source/standard/tender.rst:160
+#: ../../source/standard/tender.rst:38 ../../source/standard/tender.rst:166
 msgid "string"
 msgstr "рядок"
 
@@ -203,28 +202,28 @@ msgstr "Усі  кваліфікації (дискваліфікації та п
 msgid "List of :ref:`Contract` objects"
 msgstr "Список об’єктів :ref:`Contract`"
 
-#: ../../source/standard/tender.rst:118 ../../source/standard/tender.rst:126
+#: ../../source/standard/tender.rst:118 ../../source/standard/tender.rst:132
 msgid ":ref:`period`, required"
 msgstr ":ref:`period`, обов’язково"
 
-#: ../../source/standard/tender.rst:120
+#: ../../source/standard/tender.rst:123
 msgid "Period when questions are allowed."
 msgstr "Період, коли дозволені питання."
 
-#: ../../source/standard/tender.rst:122
+#: ../../source/standard/tender.rst:120
 msgid "|ocdsDescription| The period during which enquiries may be made."
 msgstr ""
 "|ocdsDescription| Період, протягом якого можна задавати питання про умови "
 "закупівлі."
 
-#: ../../source/standard/tender.rst:128
+#: ../../source/standard/tender.rst:134
 msgid ""
 "Period when bids can be submitted. At least `endDate` has to be provided."
 msgstr ""
 "Період, коли подаються пропозиції. Повинна бути вказана хоча б кінцева дата "
 "`endDate`."
 
-#: ../../source/standard/tender.rst:130
+#: ../../source/standard/tender.rst:136
 msgid ""
 "|ocdsDescription| The period when the tender is open for submissions. The "
 "end date is the closing date for tender submissions."
@@ -232,12 +231,12 @@ msgstr ""
 "|ocdsDescription| Період, коли закупівля відкрита для подачі пропозицій. "
 "Кінцева дата - це дата, коли перестають прийматись пропозиції."
 
-#: ../../source/standard/tender.rst:134 ../../source/standard/tender.rst:142
-#: ../../source/standard/tender.rst:152
+#: ../../source/standard/tender.rst:140 ../../source/standard/tender.rst:148
+#: ../../source/standard/tender.rst:158
 msgid ":ref:`period`, read-only"
 msgstr ":ref:`period`,  лише для читання"
 
-#: ../../source/standard/tender.rst:138
+#: ../../source/standard/tender.rst:144
 msgid ""
 "|ocdsDescription| Period when qualification can be submitted with stand "
 "still period."
@@ -245,96 +244,96 @@ msgstr ""
 "|ocdsDescription| Період, коли кваліфікацію можна подати з періодом "
 "блокування."
 
-#: ../../source/standard/tender.rst:144
+#: ../../source/standard/tender.rst:150
 msgid "Period when Auction is conducted."
 msgstr "Період, коли проводиться аукціон."
 
-#: ../../source/standard/tender.rst:147
+#: ../../source/standard/tender.rst:153
 msgid "url"
 msgstr "URL-адреса"
 
-#: ../../source/standard/tender.rst:149
+#: ../../source/standard/tender.rst:155
 msgid "A web address for view auction."
 msgstr "Веб-адреса для перегляду аукціону."
 
-#: ../../source/standard/tender.rst:154
+#: ../../source/standard/tender.rst:160
 msgid "Awarding process period."
 msgstr "Період, коли відбувається визначення переможця."
 
-#: ../../source/standard/tender.rst:156
+#: ../../source/standard/tender.rst:162
 msgid ""
 "|ocdsDescription| The date or period on which an award is anticipated to be "
 "made."
 msgstr ""
 "|ocdsDescription| Дата або період, коли очікується визначення переможця."
 
-#: ../../source/standard/tender.rst:163
+#: ../../source/standard/tender.rst:169
 msgid "Enquiries and tendering period"
 msgstr "Період подання пропозицій та уточнень."
 
-#: ../../source/standard/tender.rst:165
+#: ../../source/standard/tender.rst:171
 msgid "Pre qulification period"
 msgstr "Перед-кваліфікаційний період"
 
-#: ../../source/standard/tender.rst:167
+#: ../../source/standard/tender.rst:173
 msgid "Standstill before auction"
 msgstr "Блокування перед аукціоном."
 
-#: ../../source/standard/tender.rst:169
+#: ../../source/standard/tender.rst:175
 msgid "Auction period (auction)"
 msgstr "Період аукціону (аукціон)"
 
-#: ../../source/standard/tender.rst:171
+#: ../../source/standard/tender.rst:177
 msgid "Winner qualification (qualification)"
 msgstr "Кваліфікація переможця (кваліфікація)"
 
-#: ../../source/standard/tender.rst:173
+#: ../../source/standard/tender.rst:179
 msgid "Standstill period (standstill)"
 msgstr "Період блокування (блокування)"
 
-#: ../../source/standard/tender.rst:175
+#: ../../source/standard/tender.rst:181
 msgid "Complete tender (complete)"
 msgstr "Завершена закупівля (завершена)"
 
-#: ../../source/standard/tender.rst:177
+#: ../../source/standard/tender.rst:183
 msgid "Unsuccessful tender (unsuccessful)"
 msgstr "Закупівля не відбулась (не відбулась)"
 
-#: ../../source/standard/tender.rst:179
+#: ../../source/standard/tender.rst:185
 msgid "Cancelled tender (cancelled)"
 msgstr "Відмінена закупівля (відмінена)"
 
-#: ../../source/standard/tender.rst:181
+#: ../../source/standard/tender.rst:187
 msgid "Status of the Tender."
 msgstr "Статус Закупівлі."
 
-#: ../../source/standard/tender.rst:184
+#: ../../source/standard/tender.rst:190
 msgid "List of :ref:`lot` objects."
 msgstr "Список об’єктів :ref:`lot`."
 
-#: ../../source/standard/tender.rst:186
+#: ../../source/standard/tender.rst:192
 msgid "Contains all tender lots."
 msgstr "Містить всі лоти закупівлі."
 
-#: ../../source/standard/tender.rst:190
+#: ../../source/standard/tender.rst:196
 msgid "List of :ref:`Qualification` objects."
 msgstr "Список об’єктів :ref:`Qualification`."
 
-#: ../../source/standard/tender.rst:192
+#: ../../source/standard/tender.rst:198
 msgid "Contains all tender qualifications."
 msgstr "Містить всі кваліфікації закупівлі."
 
-#: ../../source/standard/tender.rst:195
+#: ../../source/standard/tender.rst:201
 msgid "List of :ref:`cancellation` objects."
 msgstr "Список об’єктів :ref:`cancellation`."
 
-#: ../../source/standard/tender.rst:197
+#: ../../source/standard/tender.rst:203
 msgid "Contains 1 object with `active` status in case of cancelled Tender."
 msgstr ""
 "Містить 1 об’єкт зі статусом `active` на випадок, якщо закупівлю буде "
 "відмінено."
 
-#: ../../source/standard/tender.rst:199
+#: ../../source/standard/tender.rst:205
 msgid ""
 "The :ref:`cancellation` object describes the reason of tender cancellation "
 "contains accompanying documents  if any."
@@ -342,35 +341,35 @@ msgstr ""
 "Об’єкт :ref:`cancellation` описує причину скасування закупівлі та надає "
 "відповідні документи, якщо такі є."
 
-#: ../../source/standard/tender.rst:205
+#: ../../source/standard/tender.rst:211
 msgid "Historical changes to Tender object properties."
 msgstr "Зміни властивостей об’єктів Закупівлі"
 
-#: ../../source/standard/tender.rst:209
+#: ../../source/standard/tender.rst:215
 msgid "The Tender dates should be sequential:"
 msgstr "Дати закупівлі повинні бути послідовними:"
 
-#: ../../source/standard/tender.rst:211
+#: ../../source/standard/tender.rst:217
 msgid "Current time"
 msgstr "Поточний час"
 
-#: ../../source/standard/tender.rst:212
+#: ../../source/standard/tender.rst:218
 msgid "`enquiryPeriod.startDate`"
 msgstr "`enquiryPeriod.startDate`"
 
-#: ../../source/standard/tender.rst:213
+#: ../../source/standard/tender.rst:219
 msgid "`tenderPeriod.startDate`"
 msgstr "`tenderPeriod.startDate`"
 
-#: ../../source/standard/tender.rst:214
+#: ../../source/standard/tender.rst:220
 msgid "`enquiryPeriod.endDate`"
 msgstr "`enquiryPeriod.endDate`"
 
-#: ../../source/standard/tender.rst:215
+#: ../../source/standard/tender.rst:221
 msgid "`tenderPeriod.endDate`"
 msgstr "`tenderPeriod.endDate`"
 
-#: ../../source/standard/tender.rst:136
+#: ../../source/standard/tender.rst:142
 msgid ""
 "This period consists of qualification and 10 days of stand still period."
 msgstr "Цей період включає кваліфікацію та 10-денний період блокування."
@@ -379,7 +378,7 @@ msgstr "Цей період включає кваліфікацію та 10-де
 msgid "string, auto-generated, read-only"
 msgstr "рядок, генерується автоматично, лише для читання"
 
-#: ../../source/standard/tender.rst:203
+#: ../../source/standard/tender.rst:209
 msgid "List of :ref:`revision` objects, auto-generated"
 msgstr "Список об’єктів :ref:`revision`, генерується автоматично"
 
@@ -399,12 +398,41 @@ msgstr ":ref:`ProcuringEntity`, обов’язково"
 msgid ""
 "Total available tender budget. Bids greater than ``value`` will be rejected."
 msgstr ""
-"Повний доступний бюджет аукціону. Пропозиції, що менші за ``value`` "
-"будуть відхилені."
+"Повний доступний бюджет аукціону. Пропозиції, що менші за ``value`` будуть "
+"відхилені."
 
 #: ../../source/standard/tender.rst:105
 msgid "`amount` should be less than `Tender.value.amount`"
 msgstr "Значення `amount` повинно бути меншим за `Tender.value.amount`"
+
+#: ../../source/standard/tender.rst:125
+msgid "`enquiryPeriod` has additional fields:"
+msgstr "`enquiryPeriod` має додаткові поля:"
+
+#: ../../source/standard/tender.rst:127
+msgid ""
+"``invalidationDate`` - date of the last tender conditions modification, when"
+" all bid proposals became `invalid`. Broker (eMall) should take action in "
+"order for bids to be activated or re-submitted."
+msgstr ""
+"``invalidationDate`` - це дата останньої зміни умов, коли всі подані цінові "
+"пропозиції перейшли в стан `invalid`. Відповідно необхідні дії майданчика "
+"щодо активації чи переподачі пропозицій."
+
+#: ../../source/standard/tender.rst:129
+msgid ""
+"``clarificationsUntil`` - time before which answers for questions and claims"
+" can be provided. After this time the procedure will be blocked."
+msgstr ""
+"``clarificationsUntil``- час, до якого можна давати відповіді на запитання та"
+" вимоги, після якого блокується процедура."
+
+#~ msgid ""
+#~ "``clarificationsUntil`` - time before which answers for questions and "
+#~ "complaints can be provided. After this time the procedure will be blocked."
+#~ msgstr ""
+#~ "``clarificationsUntil``- час, до якого можна давати відповіді на запитання "
+#~ "та вимоги, після якого блокується процедура."
 
 #~ msgid ""
 #~ "Total available tender budget. Bids greater then ``value`` will be rejected."
