@@ -1,4 +1,4 @@
-PATCH /api/2.3/tenders/0afd680f6a3f48059f54ae87ce085ab2/qualifications/3872653f315841469b48180bfd78e868/complaints/a60a453fccf44a139059c271fd9fb1e4?acc_token=9f70788cab9e4765a9e3f91a3ab77c72 HTTP/1.0
+PATCH /api/2.3/tenders/2436da94a50f460b89c1e014f8b95738/qualifications/c476a711da764a05b93089fd742d52a8/complaints/de24c86344a14872acac2c46e35ba387?acc_token=9d67c0ca57bd4031a176d92cfc29b34a HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Content-Length: 150
 Content-Type: application/json
@@ -17,13 +17,34 @@ Content-Type: application/json; charset=UTF-8
   "data": {
     "status": "cancelled", 
     "description": "Умови виставлені замовником не містять достатньо інформації, щоб заявка мала сенс.", 
+    "author": {
+      "contactPoint": {
+        "email": "soleksuk@gmail.com", 
+        "telephone": "+380 (432) 21-69-30", 
+        "name": "Сергій Олексюк"
+      }, 
+      "identifier": {
+        "scheme": "UA-EDR", 
+        "legalName": "Державне комунальне підприємство громадського харчування «Школяр»", 
+        "id": "13313462", 
+        "uri": "http://sch10.edu.vn.ua/"
+      }, 
+      "name": "ДКП «Школяр»", 
+      "address": {
+        "postalCode": "21100", 
+        "countryName": "Україна", 
+        "streetAddress": "вул. Островського, 33", 
+        "region": "м. Вінниця", 
+        "locality": "м. Вінниця"
+      }
+    }, 
     "title": "Недостатньо інформації", 
     "cancellationReason": "Умови виправлено", 
-    "dateCanceled": "2016-07-25T17:02:19.165386+03:00", 
-    "complaintID": "UA-2016-07-25-000001.9", 
-    "date": "2016-07-25T17:02:19.176123+03:00", 
-    "type": "claim", 
-    "id": "a60a453fccf44a139059c271fd9fb1e4"
+    "dateCanceled": "2016-07-19T18:44:37.183639+03:00", 
+    "complaintID": "UA-2016-07-19-000001.9", 
+    "date": "2016-07-19T18:44:37.196421+03:00", 
+    "type": "complaint", 
+    "id": "de24c86344a14872acac2c46e35ba387"
   }
 }
 
