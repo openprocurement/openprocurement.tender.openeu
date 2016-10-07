@@ -4,7 +4,7 @@ import webtest
 from datetime import datetime, timedelta
 from uuid import uuid4
 from copy import deepcopy
-from openprocurement.api.tests.base import BaseTenderWebTest as BaseBaseTenderWebTest
+from openprocurement.api.tests.base import BaseTenderWebTest as BaseBaseTenderWebTest, DryRunTenderBaseWebTest
 from openprocurement.api.utils import apply_data_patch
 from openprocurement.api.models import get_now, SANDBOX_MODE
 from openprocurement.tender.openeu.models import TENDERING_DAYS, TENDERING_DURATION, QUESTIONS_STAND_STILL, COMPLAINT_STAND_STILL
@@ -205,6 +205,13 @@ test_lots = [
         'minimalStep': test_tender_data['minimalStep'],
     }
 ]
+
+
+test_public_tender_data = test_tender_data.copy()
+test_public_tender_data.update({'id': uuid4().hex, 'status': 'active.tendering', 'tenderID': 'UA-X', 'dateModified': now.isoformat()})
+
+test_public_features_tender_data = test_features_tender_data.copy()
+test_public_features_tender_data.update({'id': uuid4().hex, 'status': 'active.tendering', 'tenderID': 'UA-X', 'dateModified': now.isoformat()})
 
 
 class BaseTenderWebTest(BaseBaseTenderWebTest):
@@ -565,3 +572,8 @@ class BaseTenderContentWebTest(BaseTenderWebTest):
     def setUp(self):
         super(BaseTenderContentWebTest, self).setUp()
         self.create_tender()
+
+
+class DryRunTenderBaseWebTest(DryRunTenderBaseWebTest, BaseTenderWebTest):
+    initial_data = test_public_tender_data
+    relative_to = os.path.dirname(__file__)
