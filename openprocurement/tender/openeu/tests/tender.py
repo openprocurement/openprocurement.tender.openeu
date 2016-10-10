@@ -510,17 +510,6 @@ class TenderResourceTest(BaseTenderWebTest):
             {u'description': [u'currency should be identical to currency of value of tender'], u'location': u'body', u'name': u'minimalStep'}
         ])
 
-        data = test_tender_data["items"][0]["additionalClassifications"][0]["scheme"]
-        test_tender_data["items"][0]["additionalClassifications"][0]["scheme"] = 'Не ДКПП'
-        response = self.app.post_json(request_path, {'data': test_tender_data}, status=422)
-        test_tender_data["items"][0]["additionalClassifications"][0]["scheme"] = data
-        self.assertEqual(response.status, '422 Unprocessable Entity')
-        self.assertEqual(response.content_type, 'application/json')
-        self.assertEqual(response.json['status'], 'error')
-        self.assertEqual(response.json['errors'], [
-            {u'description': [{u'additionalClassifications': [u"One of additional classifications should be one of [ДКПП, NONE, ДК003, ДК015, ДК018]."]}], u'location': u'body', u'name': u'items'}
-        ])
-
         data = test_tender_data["procuringEntity"]["contactPoint"]["telephone"]
         del test_tender_data["procuringEntity"]["contactPoint"]["telephone"]
         response = self.app.post_json(request_path, {'data': test_tender_data}, status=422)
@@ -898,7 +887,7 @@ class TenderResourceTest(BaseTenderWebTest):
         response = self.app.patch_json('/tenders/{}?acc_token={}'.format(tender['id'], owner_token), {'data': {'procuringEntity': {'kind': 'defense'}}})
         self.assertEqual(response.status, '200 OK')
         self.assertEqual(response.content_type, 'application/json')
-        self.assertNotEqual(response.json['data']['procuringEntity']['kind'], 'defense')
+        self.assertNotEqual(response.json['data']['procuringEntity'].get('kind'), 'defense')
 
         response = self.app.patch_json('/tenders/{}?acc_token={}'.format(
             tender['id'], owner_token), {'data': {'items': [test_tender_data['items'][0]]}})
