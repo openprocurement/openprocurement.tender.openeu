@@ -66,7 +66,8 @@ class TenderEUQualificationComplaintResource(TenderEUAwardComplaintResource):
             return {
                 'data': complaint.serialize("view"),
                 'access': {
-                    'token': complaint.owner_token
+                    'token': complaint.owner_token,
+                    'transfer_token': complaint.transfer_token
                 }
             }
 
