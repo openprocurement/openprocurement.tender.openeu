@@ -9,7 +9,6 @@ from openprocurement.api.utils import (
     save_tender,
     set_ownership,
 )
-from schematics.types.base import StringType
 from openprocurement.api.validation import (
     validate_complaint_data,
     validate_patch_complaint_data,
