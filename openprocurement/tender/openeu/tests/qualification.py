@@ -773,6 +773,7 @@ class TenderQualificationComplaintResourceTest(BaseTenderContentWebTest):
         self.assertEqual(response.status, '201 Created')
         self.assertEqual(response.content_type, 'application/json')
         complaint = response.json['data']
+        self.assertNotIn('transfer_token', complaint)
         self.assertEqual(complaint['author']['name'], self.initial_bids[0]["tenderers"][0]['name'])
         self.assertIn('id', complaint)
         self.assertIn(complaint['id'], response.headers['Location'])
@@ -805,6 +806,7 @@ class TenderQualificationComplaintResourceTest(BaseTenderContentWebTest):
             "title": "claim title",
         }})
         self.assertEqual(response.status, '200 OK')
+        self.assertNotIn('transfer_token', response.json['data'])
         self.assertEqual(response.json['data']["title"], "claim title")
 
         response = self.app.patch_json('/tenders/{}/qualifications/{}/complaints/{}?acc_token={}'.format(self.tender_id, self.qualification_id, complaint['id'], owner_token), {"data": {
@@ -994,6 +996,7 @@ class TenderQualificationComplaintResourceTest(BaseTenderContentWebTest):
 
         response = self.app.get('/tenders/{}/qualifications/{}/complaints'.format(self.tender_id, self.qualification_id))
         self.assertEqual(response.status, '200 OK')
+        self.assertNotIn('transfer_token', complaint)
         self.assertEqual(response.content_type, 'application/json')
         self.assertEqual(response.json['data'][0], complaint)
 
