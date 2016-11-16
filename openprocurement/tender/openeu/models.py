@@ -23,7 +23,7 @@ from openprocurement.api.models import (
     validate_cpv_group, validate_items_uniq, rounding_shouldStartAfter,
 )
 from openprocurement.tender.openua.utils import (
-    calculate_business_date,
+    calculate_business_date, has_unanswered_questions, has_unanswered_complaints
 )
 from openprocurement.tender.openua.models import (
     Complaint as BaseComplaint, Award as BaseAward, Item as BaseItem,
@@ -117,26 +117,7 @@ class Document(BaseDocument):
     language = StringType(required=True, choices=['uk', 'en', 'ru'], default='uk')
 
 
-class ConfidentialDocument(Document):
-    """ Confidential Document """
-    class Options:
-        roles = {
-            'edit': blacklist('id', 'url', 'datePublished', 'dateModified', ''),
-            'embedded': schematics_embedded_role,
-            'view': (blacklist('revisions') + schematics_default_role),
-            'restricted_view': (blacklist('revisions', 'url') + schematics_default_role),
-            'revisions': whitelist('url', 'dateModified'),
-        }
-
-    confidentiality = StringType(choices=['public', 'buyerOnly'], default='public')
-    confidentialityRationale = StringType()
-
-    def validate_confidentialityRationale(self, data, val):
-        if data['confidentiality'] != 'public':
-            if not val:
-                raise ValidationError(u"confidentialityRationale is required")
-            elif len(val) < 30:
-                raise ValidationError(u"confidentialityRationale should contain at least 30 characters")
+OpenEUDocument = Document
 
 
 class Contract(BaseContract):
@@ -272,6 +253,31 @@ class LotValue(BaseLotValue):
             raise ValidationError(u"relatedLot should be one of lots")
 
 
+class Document(Document):
+    """ Confidential Document """
+    class Options:
+        roles = {
+            'edit': blacklist('id', 'url', 'datePublished', 'dateModified', 'author', 'md5', 'download_url'),
+            'embedded': schematics_embedded_role,
+            'view': (blacklist('revisions') + schematics_default_role),
+            'restricted_view': (blacklist('revisions', 'url', 'download_url') + schematics_default_role),
+            'revisions': whitelist('url', 'dateModified'),
+        }
+
+    confidentiality = StringType(choices=['public', 'buyerOnly'], default='public')
+    confidentialityRationale = StringType()
+
+    def validate_confidentialityRationale(self, data, val):
+        if data['confidentiality'] != 'public':
+            if not val:
+                raise ValidationError(u"confidentialityRationale is required")
+            elif len(val) < 30:
+                raise ValidationError(u"confidentialityRationale should contain at least 30 characters")
+
+
+ConfidentialDocument = Document
+
+
 class Bid(BaseBid):
     class Options:
         roles = {
@@ -298,10 +304,10 @@ class Bid(BaseBid):
             'invalid.pre-qualification': whitelist('id', 'status', 'documents', 'eligibilityDocuments', 'tenderers'),
             'deleted': whitelist('id', 'status'),
         }
-    documents = ListType(ModelType(ConfidentialDocument), default=list())
-    financialDocuments = ListType(ModelType(ConfidentialDocument), default=list())
-    eligibilityDocuments = ListType(ModelType(ConfidentialDocument), default=list())
-    qualificationDocuments = ListType(ModelType(ConfidentialDocument), default=list())
+    documents = ListType(ModelType(Document), default=list())
+    financialDocuments = ListType(ModelType(Document), default=list())
+    eligibilityDocuments = ListType(ModelType(Document), default=list())
+    qualificationDocuments = ListType(ModelType(Document), default=list())
     lotValues = ListType(ModelType(LotValue), default=list())
     selfQualified = BooleanType(required=True, choices=[True])
     selfEligible = BooleanType(required=True, choices=[True])
@@ -347,6 +353,9 @@ class Bid(BaseBid):
     @bids_validation_wrapper
     def validate_parameters(self, data, parameters):
         BaseBid._validator_functions['parameters'](self, data, parameters)
+
+
+Document = OpenEUDocument
 
 
 class Award(BaseAward):
@@ -525,8 +534,7 @@ class Tender(BaseTender):
         now = get_now()
         checks = []
         if self.status == 'active.tendering' and self.tenderPeriod.endDate and \
-                not any([i.status in self.block_tender_complaint_status for i in self.complaints]) and \
-                not any([i.id for i in self.questions if not i.answer]):
+                not has_unanswered_complaints(self) and not has_unanswered_questions(self):
             checks.append(self.tenderPeriod.endDate.astimezone(TZ))
         elif self.status == 'active.pre-qualification.stand-still' and self.qualificationPeriod and self.qualificationPeriod.endDate and not any([
             i.status in self.block_complaint_status
