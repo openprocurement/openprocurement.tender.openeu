@@ -398,10 +398,6 @@ msgstr ""
 "Завантаження документів, що підтверджують відповідність, фінансових та "
 "кваліфікаційних документів."
 
-#: ../../source/tutorial.rst:288
-msgid "Register one more bid:"
-msgstr "Зареєструємо ще одну пропозицію:"
-
 #: ../../source/tutorial.rst:299
 msgid "Open EU procedure requires bid qualification."
 msgstr ""
@@ -432,6 +428,15 @@ msgstr "Замовник підтверджує кваліфікацію пер�
 #: ../../source/tutorial.rst:196
 msgid "Confidentiality"
 msgstr "Конфіденційність"
+
+#: ../../source/tutorial.rst:338
+msgid "Procuring entity approves qualifications by switching to next status:"
+msgstr "Замовник підтверджує кваліфікацію переходом до наступного статусу:"
+
+#: ../../source/tutorial.rst:343
+msgid "You may notice 10 day stand-still time set in `qualificationPeriod`."
+msgstr ""
+"Зверніть увагу на період блокування в 10 днів під час `qualificationPeriod`."
 
 #: ../../source/tutorial.rst:233
 msgid ""
@@ -735,5 +740,16 @@ msgstr "і підтвердити її, перевівши у ``pending`` ста
 #~ msgid "and then approve bid by changing status to ``pending``:"
 #~ msgstr ""
 
-#~ msgid ">>>>>>> documentation"
-#~ msgstr ""
+#: ../../source/tutorial.rst:292
+msgid "Batch-mode bid registration"
+msgstr "Пакетний режим реєстрації"
+
+#: ../../source/tutorial.rst:294
+msgid "Register one more bid with documents using single request (batch-mode):"
+msgstr ""
+"У пакетному режимі (batch-mode) є можливість зареєструвати пропозицію одним "
+"запитом. Зареєструйте ще одну пропозицію:"
+
+#: ../../source/tutorial.rst:177
+msgid "Bid registration"
+msgstr "Реєстрація пропозиції"
