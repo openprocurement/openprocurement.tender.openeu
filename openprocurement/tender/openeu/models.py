@@ -22,8 +22,10 @@ from openprocurement.api.models import (
     calc_auction_end_time, get_tender, validate_lots_uniq,
     validate_cpv_group, validate_items_uniq, rounding_shouldStartAfter,
 )
+from urlparse import urlparse, parse_qs
+from string import hexdigits
 from openprocurement.tender.openua.utils import (
-    calculate_business_date,
+    calculate_business_date, has_unanswered_questions, has_unanswered_complaints
 )
 from openprocurement.tender.openua.models import (
     Complaint as BaseComplaint, Award as BaseAward, Item as BaseItem,
@@ -273,6 +275,39 @@ class Document(Document):
                 raise ValidationError(u"confidentialityRationale is required")
             elif len(val) < 30:
                 raise ValidationError(u"confidentialityRationale should contain at least 30 characters")
+
+    @serializable(serialized_name="url")
+    def download_url(self):
+        url = self.url
+        if self.confidentiality == 'buyerOnly':
+            return self.url
+        if not url or '?download=' not in url:
+            return url
+        doc_id = parse_qs(urlparse(url).query)['download'][-1]
+        root = self.__parent__
+        parents = []
+        while root.__parent__ is not None:
+            parents[0:0] = [root]
+            root = root.__parent__
+        request = root.request
+        if not request.registry.docservice_url:
+            return url
+        if 'status' in parents[0] and parents[0].status in type(parents[0])._options.roles:
+            role = parents[0].status
+            for index, obj in enumerate(parents):
+                if obj.id != url.split('/')[(index - len(parents)) * 2 - 1]:
+                    break
+                field = url.split('/')[(index - len(parents)) * 2]
+                if "_" in field:
+                    field = field[0] + field.title().replace("_", "")[1:]
+                roles = type(obj)._options.roles
+                if roles[role if role in roles else 'default'](field, []):
+                    return url
+        from openprocurement.api.utils import generate_docservice_url
+        if not self.hash:
+            path = [i for i in urlparse(url).path.split('/') if len(i) == 32 and not set(i).difference(hexdigits)]
+            return generate_docservice_url(request, doc_id, False, '{}/{}'.format(path[0], path[-1]))
+        return generate_docservice_url(request, doc_id, False)
 
 
 ConfidentialDocument = Document
@@ -534,8 +569,7 @@ class Tender(BaseTender):
         now = get_now()
         checks = []
         if self.status == 'active.tendering' and self.tenderPeriod.endDate and \
-                not any([i.status in self.block_tender_complaint_status for i in self.complaints]) and \
-                not any([i.id for i in self.questions if not i.answer]):
+                not has_unanswered_complaints(self) and not has_unanswered_questions(self):
             checks.append(self.tenderPeriod.endDate.astimezone(TZ))
         elif self.status == 'active.pre-qualification.stand-still' and self.qualificationPeriod and self.qualificationPeriod.endDate and not any([
             i.status in self.block_complaint_status
