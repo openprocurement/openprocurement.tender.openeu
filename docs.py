@@ -354,13 +354,13 @@ class TenderResourceTest(BaseTenderWebTest):
         #### Exploring basic rules
         #
 
-        with  open('docs/source/tutorial/tender-listing.http', 'w') as self.app.file_obj:
+        with open('docs/source/tutorial/tender-listing.http', 'w') as self.app.file_obj:
             self.app.authorization = None
             response = self.app.get(request_path)
             self.assertEqual(response.status, '200 OK')
             self.app.file_obj.write("\n")
 
-        with  open('docs/source/tutorial/tender-post-attempt.http', 'w') as self.app.file_obj:
+        with open('docs/source/tutorial/tender-post-attempt.http', 'w') as self.app.file_obj:
             response = self.app.post(request_path, 'data', status=415)
             self.assertEqual(response.status, '415 Unsupported Media Type')
 
