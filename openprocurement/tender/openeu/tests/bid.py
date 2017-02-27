@@ -7,6 +7,9 @@ from openprocurement.tender.openeu.tests.base import (
     test_bids
 )
 
+from openprocurement.api.tests.base import now
+from datetime import timedelta
+
 class TenderBidResourceTest(BaseTenderContentWebTest):
     initial_status = 'active.tendering'
     initial_auth = ('Basic', ('broker', ''))
@@ -244,6 +247,19 @@ class TenderBidResourceTest(BaseTenderContentWebTest):
         self.assertEqual(response.status, '403 Forbidden')
         self.assertEqual(response.content_type, 'application/json')
         self.assertEqual(response.json['errors'][0]["description"], "Can't update bid in current (complete) tender status")
+
+        self.set_status('active.tendering')
+
+        # set tender period in future
+        tender = self.db.get(self.tender_id)
+        tender["tenderPeriod"]["endDate"] = (now + timedelta(days=32)).isoformat()
+        tender["tenderPeriod"]["startDate"] = (now + timedelta(days=1)).isoformat()
+        self.db.save(tender)
+
+        response = self.app.patch_json('/tenders/{}/bids/{}?acc_token={}'.format(self.tender_id, bid['id'], bid_token), {"data": {"value": {"amount": 400}}}, status=403)
+        self.assertEqual(response.status, '403 Forbidden')
+        self.assertEqual(response.content_type, 'application/json')
+        self.assertIn('Bid can be updated only during the tendering period:', response.json['errors'][0]["description"])
 
     def test_get_tender_bidder(self):
         response = self.app.post_json('/tenders/{}/bids'.format(
@@ -554,6 +570,36 @@ class TenderBidResourceTest(BaseTenderContentWebTest):
         self.assertFalse('value' in bid_data)
         self.assertFalse('tenderers' in bid_data)
         self.assertFalse('date' in bid_data)
+
+    def test_delete_tender_bidder_unsuccessful(self):
+        response = self.app.post_json('/tenders/{}/bids'.format(
+            self.tender_id), {'data': {'selfEligible': True, 'selfQualified': True,
+                                       'tenderers': test_bids[0]['tenderers'], "value": {"amount": 500}}})
+        self.assertEqual(response.status, '201 Created')
+        self.assertEqual(response.content_type, 'application/json')
+        bid = response.json['data']
+        bid_token = response.json['access']['token']
+
+        # set tender period in future
+        tender = self.db.get(self.tender_id)
+        tender["tenderPeriod"]["endDate"] = (now + timedelta(days=32)).isoformat()
+        tender["tenderPeriod"]["startDate"] = (now + timedelta(days=1)).isoformat()
+        self.db.save(tender)
+
+        response = self.app.delete('/tenders/{}/bids/{}?acc_token={}'.format(self.tender_id, bid['id'], bid_token),
+                                   status=403)
+        self.assertEqual(response.status, '403 Forbidden')
+        self.assertEqual(response.content_type, 'application/json')
+        self.assertIn('Bid can be deleted only during the tendering period:', response.json['errors'][0]["description"])
+
+        self.set_status('complete')
+
+        response = self.app.delete('/tenders/{}/bids/{}?acc_token={}'.format(self.tender_id, bid['id'], bid_token),
+                                   status=403)
+        self.assertEqual(response.status, '403 Forbidden')
+        self.assertEqual(response.content_type, 'application/json')
+        self.assertEqual(response.json['errors'][0]["description"],
+                         "Can't delete bid in current (complete) tender status")
 
     def test_deleted_bid_is_not_restorable(self):
         response = self.app.post_json('/tenders/{}/bids'.format(
@@ -1705,6 +1751,21 @@ class TenderBidDocumentResourceTest(BaseTenderContentWebTest):
             self.assertEqual(response.content_type, 'application/json')
             self.assertEqual(response.json['errors'][0]["description"], "Can't add document in current (complete) tender status")
 
+    def test_create_tender_bidder_document_invalid(self):
+        # set tender period in future
+        tender = self.db.get(self.tender_id)
+        tender["tenderPeriod"]["endDate"] = (now + timedelta(days=32)).isoformat()
+        tender["tenderPeriod"]["startDate"] = (now + timedelta(days=1)).isoformat()
+        self.db.save(tender)
+
+        for doc_resource in ['documents', 'financial_documents', 'eligibility_documents', 'qualification_documents']:
+            response = self.app.post('/tenders/{}/bids/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid_id, doc_resource, self.bid_token), upload_files=[('file', 'name_{}.doc'.format(doc_resource[:-1]), 'content')], status=403)
+
+            self.assertEqual(response.status, '403 Forbidden')
+            self.assertEqual(response.content_type, 'application/json')
+            self.assertIn('Document can be added only during the tendering period:', response.json['errors'][0]["description"])
+
     def test_put_tender_bidder_document(self):
         doc_id_by_type = {}
         doc_id_by_type2 = {}
@@ -2137,6 +2198,81 @@ class TenderBidDocumentResourceTest(BaseTenderContentWebTest):
             self.assertEqual(response.status, '403 Forbidden')
             self.assertEqual(response.content_type, 'application/json')
             self.assertEqual(response.json['errors'][0]["description"], "Can't update document in current (complete) tender status")
+
+    def test_patch_tender_bidder_document_invalid(self):
+        doc_id_by_type = {}
+        doc_id_by_type2 = {}
+        for doc_resource in ['documents', 'financial_documents', 'eligibility_documents', 'qualification_documents']:
+            response = self.app.post('/tenders/{}/bids/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid_id, doc_resource, self.bid_token),
+                upload_files=[('file', 'name_{}.doc'.format(doc_resource[:-1]), 'content')])
+
+            self.assertEqual(response.status, '201 Created')
+            self.assertEqual(response.content_type, 'application/json')
+            doc_id = response.json["data"]['id']
+            self.assertIn(doc_id, response.headers['Location'])
+            self.assertEqual('name_{}.doc'.format(doc_resource[:-1]), response.json["data"]["title"])
+            key = response.json["data"]["url"].split('?')[-1]
+            doc_id_by_type[doc_resource] = {'id': doc_id, 'key': key}
+
+            response = self.app.post('/tenders/{}/bids/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid2_id, doc_resource, self.bid2_token),
+                upload_files=[('file', 'name_{}.doc'.format(doc_resource[:-1]), 'content')])
+            self.assertEqual(response.status, '201 Created')
+            self.assertEqual(response.content_type, 'application/json')
+            doc_id_by_type2[doc_resource] = {'id': response.json["data"]['id'],
+                                             'key': response.json["data"]["url"].split('?')[-1]}
+
+            # upload private document
+            response = self.app.post('/tenders/{}/bids/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid_id, doc_resource, self.bid_token),
+                upload_files=[('file', 'name_{}_private.doc'.format(doc_resource[:-1]), 'content')])
+            self.assertEqual(response.status, '201 Created')
+            self.assertEqual(response.content_type, 'application/json')
+            doc_id = response.json["data"]['id']
+            self.assertIn(doc_id, response.headers['Location'])
+            self.assertEqual('name_{}_private.doc'.format(doc_resource[:-1]), response.json["data"]["title"])
+            key = response.json["data"]["url"].split('?')[-1]
+            doc_id_by_type[doc_resource + 'private'] = {'id': doc_id, 'key': key}
+            response = self.app.patch_json('/tenders/{}/bids/{}/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid_id, doc_resource, doc_id, self.bid_token), {"data": {
+                'confidentiality': 'buyerOnly',
+                'confidentialityRationale': 'Only our company sells badgers with pink hair.',
+            }})
+            self.assertEqual(response.status, '200 OK')
+
+            response = self.app.post('/tenders/{}/bids/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid2_id, doc_resource, self.bid2_token),
+                upload_files=[('file', 'name_{}_private.doc'.format(doc_resource[:-1]), 'content')])
+            self.assertEqual(response.status, '201 Created')
+            self.assertEqual(response.content_type, 'application/json')
+            doc_id = response.json["data"]['id']
+            self.assertIn(doc_id, response.headers['Location'])
+            self.assertEqual('name_{}_private.doc'.format(doc_resource[:-1]), response.json["data"]["title"])
+            key = response.json["data"]["url"].split('?')[-1]
+            doc_id_by_type2[doc_resource + 'private'] = {'id': doc_id, 'key': key}
+            response = self.app.patch_json('/tenders/{}/bids/{}/{}/{}?acc_token={}'.format(
+                self.tender_id, self.bid2_id, doc_resource, doc_id, self.bid2_token), {"data": {
+                'confidentiality': 'buyerOnly',
+                'confidentialityRationale': 'Only our company sells badgers with pink hair.',
+            }})
+            self.assertEqual(response.status, '200 OK')
+
+        # set tender period in future
+        tender = self.db.get(self.tender_id)
+        tender["tenderPeriod"]["endDate"] = (now + timedelta(days=32)).isoformat()
+        tender["tenderPeriod"]["startDate"] = (now + timedelta(days=1)).isoformat()
+        self.db.save(tender)
+
+        for doc_resource in ['documents', 'financial_documents', 'eligibility_documents', 'qualification_documents']:
+            doc_id = doc_id_by_type[doc_resource]['id']
+            response = self.app.patch_json('/tenders/{}/bids/{}/{}/{}?acc_token={}'.format(self.tender_id, self.bid_id, doc_resource, doc_id, self.bid_token),{"data": {
+                "description": "document description",
+                'language': 'en'
+            }}, status=403)
+            self.assertEqual(response.status, '403 Forbidden')
+            self.assertEqual(response.content_type, 'application/json')
+            self.assertIn('Document can be updated only during the tendering period:', response.json['errors'][0]["description"])
 
     def test_patch_tender_bidder_document_private(self):
         doc_id_by_type = {}
