@@ -1,4 +1,4 @@
-GET /api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/documents HTTP/1.0
+GET /api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/documents HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Host: api-sandbox.openprocurement.org
 
@@ -9,22 +9,22 @@ Content-Type: application/json; charset=UTF-8
     {
       "language": "uk", 
       "title": "Notice.pdf", 
-      "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/documents/a13e5ade0dc94e61b9a35862196149a6?download=a2b1b12d0a594e26b3a1f05bd1fb5918", 
+      "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/documents/1b9de2bc1c6a4a34b885dc994c6df2ce?download=9ae27ea0ecc14636a12d0df444f7d644", 
       "format": "application/pdf", 
       "documentOf": "tender", 
-      "datePublished": "2016-06-10T16:03:57.326573+03:00", 
-      "id": "a13e5ade0dc94e61b9a35862196149a6", 
-      "dateModified": "2016-06-10T16:03:57.326610+03:00"
+      "datePublished": "2017-02-24T15:41:58.468163+02:00", 
+      "id": "1b9de2bc1c6a4a34b885dc994c6df2ce", 
+      "dateModified": "2017-02-24T15:41:58.468196+02:00"
     }, 
     {
       "language": "uk", 
       "title": "AwardCriteria-2.pdf", 
-      "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/documents/cac6bd614db041c2a16ef709c8295e54?download=dd65dcdd90814f2d9d88185ed4399ba9", 
+      "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/documents/733ecc8a911a485bacb22feaa4b56531?download=91a6e514c2834bf29afb35a32c5aa25c", 
       "format": "application/pdf", 
       "documentOf": "tender", 
-      "datePublished": "2016-06-10T16:03:57.477039+03:00", 
-      "id": "cac6bd614db041c2a16ef709c8295e54", 
-      "dateModified": "2016-06-10T16:03:57.642063+03:00"
+      "datePublished": "2017-02-24T15:41:58.588839+02:00", 
+      "id": "733ecc8a911a485bacb22feaa4b56531", 
+      "dateModified": "2017-02-24T15:41:58.730367+02:00"
     }
   ]
 }

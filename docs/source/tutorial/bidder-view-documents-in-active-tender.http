@@ -1,0 +1,17 @@
+GET /api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/bids/f891de0689684480b6b611de85ba62ce/documents/79b978d22b914c0a93454cda885145d0?download=a1721891209b4364918df39d9b422b33 HTTP/1.0
+Authorization: Basic YnJva2VyOg==
+Host: api-sandbox.openprocurement.org
+
+Response: 403 Forbidden
+Content-Type: application/json; charset=UTF-8
+{
+  "status": "error", 
+  "errors": [
+    {
+      "description": "Can't view bid document in current (active.tendering) tender status", 
+      "location": "body", 
+      "name": "data"
+    }
+  ]
+}
+
