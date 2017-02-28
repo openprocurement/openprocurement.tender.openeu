@@ -179,7 +179,7 @@ Bidder can register a bid with `draft` status:
 
 .. include:: tutorial/register-bidder.http
    :code:
-anjd approve to pending status:
+and approve to pending status:
 
 .. include:: tutorial/activate-bidder.http
    :code:
@@ -202,7 +202,7 @@ Documents can be either public or private:
   3. Privacy settings can be changed only during `tenderPeriod` (with `active.tendering` status).
   4. If tender has status `active.qualification` winner can upload only public documents.
 
-Let's upload private document:
+Let's upload public document:
 
 .. include:: tutorial/upload-bid-private-proposal.http
    :code:
@@ -219,6 +219,10 @@ Let's mark the document as "private":
 
 .. include:: tutorial/mark-bid-doc-private.http
    :code:
+
+`Public` end-point shouldn't provide getting information about private document. Use primary server to download private document. For example :
+`https://lb.api-sandbox.openprocurement.org/api/2.3/tenders/019866978644451cb141683276efb4d7/bids/4343419b8ea840a69dc090e473801cc8/documents/d786d1697c0541b2b908111f56aae23e?download=35a83b81153f4b6f8c8be79f19114433`
+Before that, as before getting any private document, we need to use`authentication<http://documentservice.api-docs.openprocurement.org/en/latest/authentication.html>`_  and authorization (to get a token).
 
 It is possible to check the uploaded documents:
 
@@ -255,6 +259,13 @@ In order to create and/or get qualification document ``qualification_documents``
 
 `Financial` and `qualification` documents will be publicly accessible after the auction.
 `Eligibility` documents will become publicly accessible starting from tender pre-qualification period.
+
+
+Try to get documents by owner or viewer in active.tendering period
+
+.. include:: tutorial/bidder-view-documents-in-active-tender.http
+   :code:
+
 
 Here is bidder proposal with all documents.
 

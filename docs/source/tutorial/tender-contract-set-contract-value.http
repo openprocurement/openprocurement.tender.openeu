@@ -1,4 +1,4 @@
-PATCH /api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/contracts/2d8a4d99de124bf09281300fd40f8a83?acc_token=0219bee565f845878079d8754f1c4570 HTTP/1.0
+PATCH /api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/contracts/f429ec027b464d96ba8cec9150eff3ed?acc_token=133eb9c3e99e4cdd8e5f765a58ba5ebc HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Content-Length: 68
 Content-Type: application/json
@@ -35,17 +35,17 @@ Content-Type: application/json; charset=UTF-8
           }
         ], 
         "deliveryAddress": {
-          "countryName": "Україна", 
           "postalCode": "79000", 
+          "countryName": "Україна", 
           "streetAddress": "вул. Банкова 1", 
           "region": "м. Київ", 
           "locality": "м. Київ"
         }, 
         "deliveryDate": {
-          "startDate": "2016-06-30T16:03:38.558565+03:00", 
-          "endDate": "2016-07-30T16:03:38.558601+03:00"
+          "startDate": "2017-03-16T15:41:38.097474+02:00", 
+          "endDate": "2017-04-15T15:41:38.097517+02:00"
         }, 
-        "id": "bc9a0053d04344b0a21fdff5b9239d85", 
+        "id": "d126c96ecc03468eb2777495085c6245", 
         "unit": {
           "code": "44617100-9", 
           "name": "item"
@@ -68,17 +68,17 @@ Content-Type: application/json; charset=UTF-8
           }
         ], 
         "deliveryAddress": {
-          "countryName": "Україна", 
           "postalCode": "79000", 
+          "countryName": "Україна", 
           "streetAddress": "вул. Банкова 1", 
           "region": "м. Київ", 
           "locality": "м. Київ"
         }, 
         "deliveryDate": {
-          "startDate": "2016-06-30T16:03:38.558629+03:00", 
-          "endDate": "2016-07-30T16:03:38.558650+03:00"
+          "startDate": "2017-03-16T15:41:38.097548+02:00", 
+          "endDate": "2017-04-15T15:41:38.097579+02:00"
         }, 
-        "id": "776287fb56354c659e3a798e18756619", 
+        "id": "c962f04b5c0546ee8b6d2c7464dd526f", 
         "unit": {
           "code": "44617100-9", 
           "name": "item"
@@ -114,10 +114,9 @@ Content-Type: application/json; charset=UTF-8
       "amount": 238.0, 
       "valueAddedTaxIncluded": true
     }, 
-    "date": "2016-06-10T16:04:05.647201+03:00", 
-    "awardID": "4aa96e34b59e43bcbb3103e55428540d", 
-    "id": "2d8a4d99de124bf09281300fd40f8a83", 
-    "contractID": "UA-2016-06-10-000001-1"
+    "awardID": "78a29a4fe47842b5be748917c31795bf", 
+    "id": "f429ec027b464d96ba8cec9150eff3ed", 
+    "contractID": "UA-2017-02-24-000001-1"
   }
 }
 

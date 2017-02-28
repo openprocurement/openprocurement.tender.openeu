@@ -1,4 +1,4 @@
-GET /api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/bids?acc_token=0219bee565f845878079d8754f1c4570 HTTP/1.0
+GET /api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/bids?acc_token=133eb9c3e99e4cdd8e5f765a58ba5ebc HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Host: api-sandbox.openprocurement.org
 
@@ -13,27 +13,26 @@ Content-Type: application/json; charset=UTF-8
           "confidentiality": "public", 
           "language": "uk", 
           "title": "Proposal.pdf", 
-          "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/bids/3adfb37218124cc59b6d7b3a06b2356a/documents/f9f70864b0f3467bb3f91942fd0450f3?download=59c8130af86f47fd852a298ae6fe9e9a", 
+          "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/bids/f891de0689684480b6b611de85ba62ce/documents/3b71f964e7a9400daf8b92252a59e276?download=e3ccba9cf651465c9aa5653a7c1f2bcf", 
           "format": "application/pdf", 
           "documentOf": "tender", 
-          "datePublished": "2016-06-10T16:03:59.180077+03:00", 
-          "id": "f9f70864b0f3467bb3f91942fd0450f3", 
-          "dateModified": "2016-06-10T16:03:59.180113+03:00"
+          "datePublished": "2017-02-24T15:41:59.786386+02:00", 
+          "id": "3b71f964e7a9400daf8b92252a59e276", 
+          "dateModified": "2017-02-24T15:41:59.786419+02:00"
         }, 
         {
           "confidentiality": "buyerOnly", 
           "language": "uk", 
           "title": "Proposal_top_secrets.pdf", 
-          "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/bids/3adfb37218124cc59b6d7b3a06b2356a/documents/a46194d3f26e41b3b5e0edbd144d0551?download=8ffbdfd9b4114eccb99d2f41527f6186", 
+          "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/bids/f891de0689684480b6b611de85ba62ce/documents/79b978d22b914c0a93454cda885145d0?download=a1721891209b4364918df39d9b422b33", 
           "confidentialityRationale": "Only our company sells badgers with pink hair.", 
           "format": "application/pdf", 
           "documentOf": "tender", 
-          "datePublished": "2016-06-10T16:03:59.350963+03:00", 
-          "id": "a46194d3f26e41b3b5e0edbd144d0551", 
-          "dateModified": "2016-06-10T16:03:59.350999+03:00"
+          "datePublished": "2017-02-24T15:41:59.921495+02:00", 
+          "id": "79b978d22b914c0a93454cda885145d0", 
+          "dateModified": "2017-02-24T15:41:59.921539+02:00"
         }
       ], 
-      "id": "3adfb37218124cc59b6d7b3a06b2356a", 
       "tenderers": [
         {
           "contactPoint": {
@@ -55,11 +54,25 @@ Content-Type: application/json; charset=UTF-8
             "locality": "м. Вінниця"
           }
         }
+      ], 
+      "id": "f891de0689684480b6b611de85ba62ce", 
+      "eligibilityDocuments": [
+        {
+          "confidentiality": "public", 
+          "language": "uk", 
+          "title": "eligibility_doc.pdf", 
+          "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/bids/f891de0689684480b6b611de85ba62ce/eligibility_documents/aeed7b17da5848069e507cdb3e16209d?download=848afbb00aa94746872e687b952dd148", 
+          "format": "application/pdf", 
+          "documentOf": "tender", 
+          "datePublished": "2017-02-24T15:42:00.529068+02:00", 
+          "id": "aeed7b17da5848069e507cdb3e16209d", 
+          "dateModified": "2017-02-24T15:42:00.529102+02:00"
+        }
       ]
     }, 
     {
       "status": "active", 
-      "id": "19dd4bb3fab246cd9d01577f0cdfc9f9", 
+      "id": "3fbfd60d89c04439a6ca2aa1ec5295c5", 
       "tenderers": [
         {
           "contactPoint": {
@@ -109,7 +122,7 @@ Content-Type: application/json; charset=UTF-8
         }
       ], 
       "selfQualified": true, 
-      "id": "82a0c48a7f8b4e56bd86cc558f9ecb30"
+      "id": "671472aa879e44189e15b1aee6457d53"
     }
   ]
 }
