@@ -222,7 +222,7 @@ Let's mark the document as "private":
 
 `Public` end-point shouldn't provide getting information about private document. Use primary server to download private document. For example :
 `https://lb.api-sandbox.openprocurement.org/api/2.3/tenders/019866978644451cb141683276efb4d7/bids/4343419b8ea840a69dc090e473801cc8/documents/d786d1697c0541b2b908111f56aae23e?download=35a83b81153f4b6f8c8be79f19114433`
-Before that, as before getting any private document, we need to use`authentication<http://documentservice.api-docs.openprocurement.org/en/latest/authentication.html>`_  and authorization (to get a token).
+Before that, as before getting any private document, we need to use `authentication <http://documentservice.api-docs.openprocurement.org/en/latest/authentication.html>`_ and authorization (to get a token).
 
 It is possible to check the uploaded documents:
 
@@ -261,7 +261,7 @@ In order to create and/or get qualification document ``qualification_documents``
 `Eligibility` documents will become publicly accessible starting from tender pre-qualification period.
 
 
-Try to get documents by owner or viewer in active.tendering period
+Try to get documents by owner or viewer in ``active.tendering`` period
 
 .. include:: tutorial/bidder-view-documents-in-active-tender.http
    :code:
