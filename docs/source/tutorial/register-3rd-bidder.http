@@ -1,4 +1,4 @@
-POST /api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/bids HTTP/1.0
+POST /api/2.3/tenders/7692f1be5b5b409d8900a9791ae5c3ba/bids HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Content-Length: 727
 Content-Type: application/json
@@ -38,10 +38,10 @@ DATA:
 
 Response: 201 Created
 Content-Type: application/json; charset=UTF-8
-Location: http://api-sandbox.openprocurement.org/api/2.3/tenders/72a60ff1652a431692b0095fc9184a86/bids/82a0c48a7f8b4e56bd86cc558f9ecb30
+Location: http://api-sandbox.openprocurement.org/api/2.3/tenders/7692f1be5b5b409d8900a9791ae5c3ba/bids/0f4db61ace5149e598a4fba9eb33692a
 {
   "access": {
-    "token": "5267309e83194b58ae233559e1cd7f63"
+    "token": "9b0dc34abc534add9458790b8623d0e0"
   }, 
   "data": {
     "status": "pending", 
@@ -74,8 +74,8 @@ Location: http://api-sandbox.openprocurement.org/api/2.3/tenders/72a60ff1652a431
         }
       }
     ], 
-    "date": "2016-06-10T16:04:01.467363+03:00", 
-    "id": "82a0c48a7f8b4e56bd86cc558f9ecb30"
+    "date": "2017-03-20T15:17:53.124255+02:00", 
+    "id": "0f4db61ace5149e598a4fba9eb33692a"
   }
 }
 
