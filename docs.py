@@ -541,7 +541,6 @@ class TenderResourceTest(BaseTenderWebTest):
                     self.tender_id, bid1_id, bids_access[bid1_id]), upload_files=[('file', 'Proposal_top_secrets.pdf', 'content')])
             self.assertEqual(response.status, '201 Created')
             priv_doc_id = response.json['data']['id']
-            priv_doc_key = response.json["data"]["url"].split('?')[-1]
 
         # set confidentiality properties
         with open('docs/source/tutorial/mark-bid-doc-private.http', 'w') as self.app.file_obj:
@@ -589,11 +588,15 @@ class TenderResourceTest(BaseTenderWebTest):
                                            {'data': {"value": {'amount': 501.0}}})
         self.assertEqual(response.status, '200 OK')
 
-        with open('docs/source/tutorial/bidder-view-documents-in-active-tender.http', 'w') as self.app.file_obj:
-            response = self.app.get('/tenders/{}/bids/{}/documents/{}?{}'.format(
-                    self.tender_id, bid1_id, priv_doc_id, priv_doc_key), status=403)
-        self.assertEqual(response.status, '403 Forbidden')
-        self.assertEqual(response.json['errors'][0]["description"], 'Can\'t view bid document in current (active.tendering) tender status')
+        with open('docs/source/tutorial/bidder-owner-view-documents-in-active-tender.http', 'w') as self.app.file_obj:
+            response = self.app.get('/tenders/{}/bids/{}/documents/{}?acc_token={}'.format(
+                    self.tender_id, bid1_id, priv_doc_id, bids_access[bid1_id]))
+            self.assertEqual(response.status, '200 OK')
+
+        with open('docs/source/tutorial/tender-owner-view-documents-in-active-tender.http', 'w') as self.app.file_obj:
+            response = self.app.get('/tenders/{}/bids/{}/documents/{}?acc_token={}'.format(
+                    self.tender_id, bid1_id, priv_doc_id, owner_token), status=403)
+            self.assertEqual(response.status, '403 Forbidden')
 
         #### Bid invalidation
         #
@@ -672,6 +675,16 @@ class TenderResourceTest(BaseTenderWebTest):
             response = self.app.get('/tenders/{}/bids/{}?acc_token={}'.format(
                     self.tender_id, bid3_id, owner_token))
             self.assertEqual(response.status, "200 OK")
+
+        with open('docs/source/tutorial/bidder-owner-view-documents-in-pre-qualification.http', 'w') as self.app.file_obj:
+            response = self.app.get('/tenders/{}/bids/{}/documents/{}?acc_token={}'.format(
+                    self.tender_id, bid1_id, priv_doc_id, bids_access[bid1_id]))
+            self.assertEqual(response.status, '200 OK')
+
+        with open('docs/source/tutorial/tender-owner-view-documents-in-pre-qualification.http', 'w') as self.app.file_obj:
+            response = self.app.get('/tenders/{}/bids/{}/documents/{}?acc_token={}'.format(
+                    self.tender_id, bid1_id, priv_doc_id, owner_token))
+            self.assertEqual(response.status, '200 OK')
 
         # active.pre-qualification.stand-still
 

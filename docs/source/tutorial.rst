@@ -221,8 +221,10 @@ Let's mark the document as "private":
    :code:
 
 `Public` end-point shouldn't provide getting information about private document. Use primary server to download private document. For example :
-`https://lb.api-sandbox.openprocurement.org/api/2.3/tenders/019866978644451cb141683276efb4d7/bids/4343419b8ea840a69dc090e473801cc8/documents/d786d1697c0541b2b908111f56aae23e?download=35a83b81153f4b6f8c8be79f19114433`
-Before that, as before getting any private document, we need to use `authentication <http://documentservice.api-docs.openprocurement.org/en/latest/authentication.html>`_ and authorization (to get a token).
+`https://lb.api.openprocurement.org/api/2.3/tenders/077489bd8f734528bc6b55e13de4c30c/
+bids/c5b5369a1cf14f499015b30ffc46a7f0/documents/8ebb9dd4537e4d489fbcfdb9bb834974?download=75e93e1e88f544a4b7e0dec8cd79f12d&acc_token=xxxxxxxxxxxxxxxxx.`
+This url (without acc_token) we can find in `data.url` in response after post document in API (that we did above). To get private document we should add to url access token (in url `acc_token=xxxxxxxxxxxxxxxxx`).
+How to get access token read `here <http://api-docs.openprocurement.org/en/latest/authentication.html>`_ .
 
 It is possible to check the uploaded documents:
 
@@ -261,11 +263,15 @@ In order to create and/or get qualification document ``qualification_documents``
 `Eligibility` documents will become publicly accessible starting from tender pre-qualification period.
 
 
-Try to get documents by owner or viewer in ``active.tendering`` period
+Only bid owner can get private document in ``active.tendering`` period. Let's check it:
 
 .. include:: tutorial/bidder-view-documents-in-active-tender.http
    :code:
 
+And now try to get this document by tender owner:
+
+.. include:: tutorial/tender-owner-view-documents-in-active-tender.http
+   :code:
 
 Here is bidder proposal with all documents.
 
@@ -321,6 +327,17 @@ Approve first two bids through qualification objects:
    :code:
 
 .. include:: tutorial/approve-qualification2.http
+   :code:
+
+Try to get private document by bid owner:
+
+.. include:: tutorial/bidder-owner-view-documents-in-pre-qualification.http
+   :code:
+
+The private document becomes available for tender owner in ``active.pre-qualification`` period.
+Let's check it:
+
+.. include:: tutorial/tender-owner-view-documents-in-pre-qualification.http
    :code:
 
 We can also reject bid:

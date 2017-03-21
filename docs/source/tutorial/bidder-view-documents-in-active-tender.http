@@ -1,16 +1,33 @@
-GET /api/2.3/tenders/67c60125fe6d4e54958d0395a22f5f73/bids/f891de0689684480b6b611de85ba62ce/documents/79b978d22b914c0a93454cda885145d0?download=a1721891209b4364918df39d9b422b33 HTTP/1.0
+GET /api/2.3/tenders/092dac8e3a36414a92440d995961c99c/bids/db5b95c28003494fa0f7a4fa3149814f/documents?acc_token=f5162ed716954d418dc9ed0d8ae6719e HTTP/1.0
 Authorization: Basic YnJva2VyOg==
 Host: api-sandbox.openprocurement.org
 
-Response: 403 Forbidden
+Response: 200 OK
 Content-Type: application/json; charset=UTF-8
 {
-  "status": "error", 
-  "errors": [
+  "data": [
     {
-      "description": "Can't view bid document in current (active.tendering) tender status", 
-      "location": "body", 
-      "name": "data"
+      "confidentiality": "public", 
+      "language": "uk", 
+      "title": "Proposal.pdf", 
+      "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/092dac8e3a36414a92440d995961c99c/bids/db5b95c28003494fa0f7a4fa3149814f/documents/9ec73444067f43239f10ed05b0af59e8?download=0d5b478de4d0483bb59b25d57aa5f839", 
+      "format": "application/pdf", 
+      "documentOf": "tender", 
+      "datePublished": "2017-03-20T12:17:38.853868+02:00", 
+      "id": "9ec73444067f43239f10ed05b0af59e8", 
+      "dateModified": "2017-03-20T12:17:38.853901+02:00"
+    }, 
+    {
+      "confidentiality": "buyerOnly", 
+      "language": "uk", 
+      "title": "Proposal_top_secrets.pdf", 
+      "url": "http://api-sandbox.openprocurement.org/api/2.3/tenders/092dac8e3a36414a92440d995961c99c/bids/db5b95c28003494fa0f7a4fa3149814f/documents/4e8ea84a74cc49acae71f461a4ac88f8?download=04a971ea7c544d509d5defa89812d3e9", 
+      "confidentialityRationale": "Only our company sells badgers with pink hair.", 
+      "format": "application/pdf", 
+      "documentOf": "tender", 
+      "datePublished": "2017-03-20T12:17:38.976184+02:00", 
+      "id": "4e8ea84a74cc49acae71f461a4ac88f8", 
+      "dateModified": "2017-03-20T12:17:38.976217+02:00"
     }
   ]
 }
