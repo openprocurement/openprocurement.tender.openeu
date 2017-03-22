@@ -10,6 +10,12 @@ from openprocurement.tender.core.utils import (
     save_tender,
     calculate_business_date
 )
+from openprocurement.api.validation import ViewPermissionValidationError
+from openprocurement.tender.core.validation import (
+    validate_tender_status_update_in_terminated_status,
+    validate_tender_period_extension_request_validated,
+    validate_update_tender_status_not_in_pre_qualification
+)
 from openprocurement.tender.belowthreshold.views.tender import TenderResource
 from openprocurement.tender.openeu.utils import (
     check_status,
@@ -81,47 +87,41 @@ class TenderEUResource(TenderResource):
 
         """
         tender = self.context
-        if self.request.authenticated_role != 'Administrator' and tender.status in ['complete', 'unsuccessful', 'cancelled']:
-            self.request.errors.add('body', 'data', 'Can\'t update tender in current ({}) status'.format(tender.status))
-            self.request.errors.status = 403
-            return
-        data = self.request.validated['data']
-        if self.request.authenticated_role == 'tender_owner' and 'status' in data and data['status'] not in ['active.pre-qualification.stand-still', tender.status]:
-            self.request.errors.add('body', 'data', 'Can\'t update tender status')
-            self.request.errors.status = 403
-            return
+        try:
+            validate_tender_status_update_in_terminated_status(self.request, tender)
+            data = self.request.validated['data']
+            validate_update_tender_status_not_in_pre_qualification(self.request, tender, data)
 
-        if self.request.authenticated_role == 'tender_owner' and self.request.validated['tender_status'] == 'active.tendering':
-            if 'tenderPeriod' in data and 'endDate' in data['tenderPeriod']:
-                self.request.validated['tender'].tenderPeriod.import_data(data['tenderPeriod'])
-                if calculate_business_date(get_now(), TENDERING_EXTRA_PERIOD, self.request.validated['tender']) > self.request.validated['tender'].tenderPeriod.endDate:
-                    self.request.errors.add('body', 'data', 'tenderPeriod should be extended by {0.days} days'.format(TENDERING_EXTRA_PERIOD))
+            if self.request.authenticated_role == 'tender_owner' and self.request.validated['tender_status'] == 'active.tendering':
+                if 'tenderPeriod' in data and 'endDate' in data['tenderPeriod']:
+                    self.request.validated['tender'].tenderPeriod.import_data(data['tenderPeriod'])
+                    validate_tender_period_extension_request_validated(self.request, TENDERING_EXTRA_PERIOD)
+                    self.request.validated['tender'].initialize()
+                    self.request.validated['data']["enquiryPeriod"] = self.request.validated['tender'].enquiryPeriod.serialize()
+        except ViewPermissionValidationError:
+            return
+        else:
+            apply_patch(self.request, save=False, src=self.request.validated['tender_src'])
+            if self.request.authenticated_role == 'chronograph':
+                check_status(self.request)
+            elif self.request.authenticated_role == 'tender_owner' and tender.status == 'active.tendering':
+                tender.invalidate_bids_data()
+            elif self.request.authenticated_role == 'tender_owner' and self.request.validated['tender_status'] == 'active.pre-qualification' and tender.status == "active.pre-qualification.stand-still":
+                active_lots = [lot.id for lot in tender.lots if lot.status == 'active'] if tender.lots else [None]
+                if any([i['status'] in self.request.validated['tender'].block_complaint_status for q in self.request.validated['tender']['qualifications'] for i in q['complaints'] if q['lotID'] in active_lots]):
+                    self.request.errors.add('body', 'data', 'Can\'t switch to \'active.pre-qualification.stand-still\' before resolve all complaints')
                     self.request.errors.status = 403
                     return
-                self.request.validated['tender'].initialize()
-                self.request.validated['data']["enquiryPeriod"] = self.request.validated['tender'].enquiryPeriod.serialize()
+                if all_bids_are_reviewed(self.request):
+                    normalized_date = calculate_normalized_date(get_now(), tender, True)
+                    tender.qualificationPeriod.endDate = calculate_business_date(normalized_date, COMPLAINT_STAND_STILL, self.request.validated['tender'])
+                    tender.check_auction_time()
+                else:
+                    self.request.errors.add('body', 'data', 'Can\'t switch to \'active.pre-qualification.stand-still\' while not all bids are qualified')
+                    self.request.errors.status = 403
+                    return
 
-        apply_patch(self.request, save=False, src=self.request.validated['tender_src'])
-        if self.request.authenticated_role == 'chronograph':
-            check_status(self.request)
-        elif self.request.authenticated_role == 'tender_owner' and tender.status == 'active.tendering':
-            tender.invalidate_bids_data()
-        elif self.request.authenticated_role == 'tender_owner' and self.request.validated['tender_status'] == 'active.pre-qualification' and tender.status == "active.pre-qualification.stand-still":
-            active_lots = [lot.id for lot in tender.lots if lot.status == 'active'] if tender.lots else [None]
-            if any([i['status'] in self.request.validated['tender'].block_complaint_status for q in self.request.validated['tender']['qualifications'] for i in q['complaints'] if q['lotID'] in active_lots]):
-                self.request.errors.add('body', 'data', 'Can\'t switch to \'active.pre-qualification.stand-still\' before resolve all complaints')
-                self.request.errors.status = 403
-                return
-            if all_bids_are_reviewed(self.request):
-                normalized_date = calculate_normalized_date(get_now(), tender, True)
-                tender.qualificationPeriod.endDate = calculate_business_date(normalized_date, COMPLAINT_STAND_STILL, self.request.validated['tender'])
-                tender.check_auction_time()
-            else:
-                self.request.errors.add('body', 'data', 'Can\'t switch to \'active.pre-qualification.stand-still\' while not all bids are qualified')
-                self.request.errors.status = 403
-                return
-
-        save_tender(self.request)
-        self.LOGGER.info('Updated tender {}'.format(tender.id),
-                    extra=context_unpack(self.request, {'MESSAGE_ID': 'tender_patch'}))
-        return {'data': tender.serialize(tender.status)}
+            save_tender(self.request)
+            self.LOGGER.info('Updated tender {}'.format(tender.id),
+                        extra=context_unpack(self.request, {'MESSAGE_ID': 'tender_patch'}))
+            return {'data': tender.serialize(tender.status)}
