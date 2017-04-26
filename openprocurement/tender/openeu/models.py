@@ -13,15 +13,15 @@ from string import hexdigits
 from openprocurement.api.utils import get_now
 from openprocurement.api.constants import TZ
 from openprocurement.api.models import (
-    listing_role, Address, Period,
-    IsoDateTimeType, ListType, Identifier as BaseIdentifier,
+    listing_role, Address, Period, Model,
+    IsoDateTimeType, ListType, SifterListType, Identifier as BaseIdentifier,
     ContactPoint as BaseContactPoint, plain_role
 )
 from openprocurement.api.validation import (
     validate_cpv_group, validate_items_uniq
 )
 from openprocurement.tender.core.models import (
-    ITender, Model,
+    ITender,
     Bid as BaseBid,
     Contract as BaseContract,
     Cancellation as BaseCancellation,
@@ -30,17 +30,21 @@ from openprocurement.tender.core.models import (
     LotValue as BaseLotValue,
     Parameter as BaseParameter,
     ComplaintModelType as BaseComplaintModelType,
+    EnquiryPeriod,
+    PeriodStartEndRequired,
     create_role, edit_role, view_role,
     auction_view_role, auction_post_role, auction_patch_role, enquiries_role,
     auction_role, chronograph_role, chronograph_view_role, view_bid_role,
     Administrator_bid_role, Administrator_role, schematics_default_role,
     schematics_embedded_role, embedded_lot_role, default_lot_role,
-    calc_auction_end_time, get_tender, validate_lots_uniq,
+    get_tender, validate_lots_uniq,
     rounding_shouldStartAfter,
     validate_parameters_uniq,
+    bids_validation_wrapper
 )
 from openprocurement.tender.core.utils import (
-    calculate_business_date
+    calculate_business_date,
+    calc_auction_end_time,
 )
 from openprocurement.tender.belowthreshold.models import (
     Tender as BaseTender
@@ -54,9 +58,6 @@ from openprocurement.tender.openua.models import (
     Complaint as BaseComplaint,
     Award as BaseAward,
     Item as BaseItem,
-    PeriodStartEndRequired,
-    SifterListType,
-    EnquiryPeriod,
     Tender as OpenUATender,
 )
 from openprocurement.tender.openua.constants import (
@@ -82,23 +83,6 @@ eu_auction_role = auction_role
 
 class IAboveThresholdEUTender(ITender):
      """ Marker interface for aboveThresholdEU tenders """
-
-
-def bids_validation_wrapper(validation_func):
-    def validator(klass, data, value):
-        orig_data = data
-        while not isinstance(data['__parent__'], Tender):
-            data = data['__parent__']
-        if data['status'] in ('deleted', 'invalid', 'draft'):
-            # skip not valid bids
-            return
-        tender = data['__parent__']
-        request = tender.__parent__.request
-        if request.method == "PATCH" and isinstance(tender, Tender) and request.authenticated_role == "tender_owner":
-            # disable bids validation on tender PATCH requests as tender bids will be invalidated
-            return
-        return validation_func(klass, orig_data, value)
-    return validator
 
 
 class BidModelType(ModelType):
