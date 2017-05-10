@@ -5,6 +5,16 @@ from copy import deepcopy
 from openprocurement.api.tests.base import snitch
 
 from openprocurement.tender.belowthreshold.tests.base import test_organization
+from openprocurement.tender.belowthreshold.tests.contract import (
+    TenderContractResourceTestMixin,
+    TenderContractDocumentResourceTestMixin
+)
+
+from openprocurement.tender.openua.tests.contract_blanks import (
+    # TenderContractResourceTest
+    create_tender_contract,
+    patch_tender_contract_datesigned,
+)
 
 from openprocurement.tender.openeu.tests.base import (
     BaseTenderContentWebTest,
@@ -12,28 +22,18 @@ from openprocurement.tender.openeu.tests.base import (
     test_bids
 )
 from openprocurement.tender.openeu.tests.contract_blanks import (
-    # TenderContractDocumentResourceTest
-    not_found,
-    create_tender_contract_document,
-    put_tender_contract_document,
-    patch_tender_contract_document,
     # TenderContractResourceTest
     contract_termination,
-    create_tender_contract_invalid,
-    create_tender_contract,
-    patch_tender_contract_datesigned,
     patch_tender_contract,
-    get_tender_contract,
-    get_tender_contracts,
 )
 
 
-class TenderContractResourceTest(BaseTenderContentWebTest):
+class TenderContractResourceTest(BaseTenderContentWebTest, TenderContractResourceTestMixin):
     #initial_data = tender_data
     initial_status = 'active.qualification'
     initial_bids = test_bids
-
     initial_auth = ('Basic', ('broker', ''))
+
     def setUp(self):
         super(TenderContractResourceTest, self).setUp()
         # Create award
@@ -47,20 +47,17 @@ class TenderContractResourceTest(BaseTenderContentWebTest):
         response = self.app.patch_json('/tenders/{}/awards/{}'.format(self.tender_id, self.award_id), {"data": {"status": "active", "qualified": True, "eligible": True}})
 
     test_contract_termination = snitch(contract_termination)
-    test_create_tender_contract_invalid = snitch(create_tender_contract_invalid)
     test_create_tender_contract = snitch(create_tender_contract)
     test_patch_tender_contract_datesigned = snitch(patch_tender_contract_datesigned)
     test_patch_tender_contract = snitch(patch_tender_contract)
-    test_get_tender_contract = snitch(get_tender_contract)
-    test_get_tender_contracts = snitch(get_tender_contracts)
 
 
-class TenderContractDocumentResourceTest(BaseTenderContentWebTest):
+class TenderContractDocumentResourceTest(BaseTenderContentWebTest, TenderContractDocumentResourceTestMixin):
     #initial_data = tender_data
     initial_status = 'active.qualification'
     initial_bids = test_bids
-
     initial_auth = ('Basic', ('broker', ''))
+
     def setUp(self):
         super(TenderContractDocumentResourceTest, self).setUp()
         # Create award
@@ -76,11 +73,6 @@ class TenderContractDocumentResourceTest(BaseTenderContentWebTest):
         contract = response.json['data']
         self.contract_id = contract['id']
         self.app.authorization = ('Basic', ('broker', ''))
-
-    test_not_found = snitch(not_found)
-    test_create_tender_contract_document = snitch(create_tender_contract_document)
-    test_put_tender_contract_document = snitch(put_tender_contract_document)
-    test_patch_tender_contract_document = snitch(patch_tender_contract_document)
 
 
 def suite():

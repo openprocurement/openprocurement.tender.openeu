@@ -3,6 +3,21 @@ import unittest
 
 from openprocurement.api.tests.base import snitch
 
+from openprocurement.tender.belowthreshold.tests.lot import (
+    TenderLotResourceTestMixin,
+    TenderEULotResourceTestMixin,
+    TenderLotFeatureResourceTestMixin,
+    TenderLotProcessTestMixin
+)
+
+from openprocurement.tender.belowthreshold.tests.base import test_organization
+
+from openprocurement.tender.openua.tests.lot_blanks import (
+    # TenderLotResourceTest
+    get_tender_lot,
+    get_tender_lots,
+)
+
 from openprocurement.tender.openeu.tests.base import (
     BaseTenderContentWebTest,
     test_tender_data,
@@ -11,15 +26,12 @@ from openprocurement.tender.openeu.tests.base import (
 )
 from openprocurement.tender.openeu.tests.lot_blanks import (
     # TenderLotProcessTest
-    one_lot_0bid,
     one_lot_1bid,
     one_lot_2bid_1unqualified,
     one_lot_2bid,
     two_lot_2bid_1lot_del,
     one_lot_3bid_1del,
     one_lot_3bid_1un,
-    two_lot_0bid,
-    two_lot_2can,
     two_lot_1can,
     two_lot_2bid_0com_1can,
     two_lot_2bid_2com_2win,
@@ -30,48 +42,15 @@ from openprocurement.tender.openeu.tests.lot_blanks import (
     # TenderLotBidderResourceTest
     create_tender_bidder_invalid,
     patch_tender_bidder,
-    # TenderLotFeatureResourceTest
-    tender_value,
-    tender_features_invalid,
     # TenderLotEdgeCasesTest
     question_blocking,
     claim_blocking,
     next_check_value_with_unanswered_question,
     next_check_value_with_unanswered_claim,
-    # TenderLotResourceTest
-    create_tender_lot_invalid,
-    create_tender_lot,
-    patch_tender_lot,
-    patch_tender_currency,
-    patch_tender_vat,
-    get_tender_lot,
-    get_tender_lots,
-    delete_tender_lot,
-    tender_lot_guarantee,
 )
 
 
-class TenderLotResourceTest(BaseTenderContentWebTest):
-
-    initial_auth = ('Basic', ('broker', ''))
-    test_lots_data = test_lots  # TODO: change attribute identifier
-    initial_data = test_tender_data
-
-    test_create_tender_lot_invalid = snitch(create_tender_lot_invalid)
-    test_create_tender_lot = snitch(create_tender_lot)
-    test_patch_tender_lot = snitch(patch_tender_lot)
-    test_patch_tender_currency = snitch(patch_tender_currency)
-    test_patch_tender_vat = snitch(patch_tender_vat)
-    test_get_tender_lot = snitch(get_tender_lot)
-    test_get_tender_lots = snitch(get_tender_lots)
-    test_delete_tender_lot = snitch(delete_tender_lot)
-    test_tender_lot_guarantee = snitch(tender_lot_guarantee)
-
-
-class TenderLotEdgeCasesTest(BaseTenderContentWebTest):
-    initial_auth = ('Basic', ('broker', ''))
-    initial_lots = test_lots * 2
-    initial_bids = test_bids
+class TenderLotEdgeCasesTestMixin(object):
 
     test_question_blocking = snitch(question_blocking)
     test_claim_blocking = snitch(claim_blocking)
@@ -79,13 +58,30 @@ class TenderLotEdgeCasesTest(BaseTenderContentWebTest):
     test_next_check_value_with_unanswered_claim = snitch(next_check_value_with_unanswered_claim)
 
 
-class TenderLotFeatureResourceTest(BaseTenderContentWebTest):
+class TenderLotResourceTest(BaseTenderContentWebTest, TenderLotResourceTestMixin, TenderEULotResourceTestMixin):
+
+    initial_auth = ('Basic', ('broker', ''))
+    test_lots_data = test_lots  # TODO: change attribute identifier
+    initial_data = test_tender_data
+
+    test_get_tender_lot = snitch(get_tender_lot)
+    test_get_tender_lots = snitch(get_tender_lots)
+
+
+class TenderLotEdgeCasesTest(BaseTenderContentWebTest, TenderLotEdgeCasesTestMixin):
+    initial_auth = ('Basic', ('broker', ''))
+    initial_lots = test_lots * 2
+    initial_bids = test_bids
+    test_author = test_organization
+
+
+class TenderLotFeatureResourceTest(BaseTenderContentWebTest, TenderLotFeatureResourceTestMixin):
     initial_lots = 2 * test_lots
     initial_auth = ('Basic', ('broker', ''))
     initial_data = test_tender_data
-
-    test_tender_value = snitch(tender_value)
-    test_tender_features_invalid = snitch(tender_features_invalid)
+    invalid_feature_value = 0.4
+    max_feature_value = 0.3
+    sum_of_max_value_of_all_features = 0.3
 
 
 class TenderLotBidderResourceTest(BaseTenderContentWebTest):
@@ -171,21 +167,20 @@ class TenderLotFeatureBidderResourceTest(BaseTenderContentWebTest):
     test_create_tender_bidder = snitch(create_tender_feature_bidder)
 
 
-class TenderLotProcessTest(BaseTenderContentWebTest):
+class TenderLotProcessTest(BaseTenderContentWebTest, TenderLotProcessTestMixin):
     setUp = BaseTenderContentWebTest.setUp
     test_lots_data = test_lots  # TODO: change attribute identifier
     initial_data = test_tender_data
     test_bids_data = test_bids  # TODO: change attribute identifier
 
-    test_1lot_0bid = snitch(one_lot_0bid)
+    days_till_auction_starts = 16
+
     test_1lot_1bid = snitch(one_lot_1bid)
     test_1lot_2bid_1unqualified = snitch(one_lot_2bid_1unqualified)
     test_1lot_2bid = snitch(one_lot_2bid)
     test_2lot_2bid_1lot_del = snitch(two_lot_2bid_1lot_del)
     test_1lot_3bid_1del = snitch(one_lot_3bid_1del)
     test_1lot_3bid_1un = snitch(one_lot_3bid_1un)
-    test_2lot_0bid = snitch(two_lot_0bid)
-    test_2lot_2can = snitch(two_lot_2can)
     test_2lot_1can = snitch(two_lot_1can)
     test_2lot_2bid_0com_1can = snitch(two_lot_2bid_0com_1can)
     test_2lot_2bid_2com_2win = snitch(two_lot_2bid_2com_2win)

@@ -8,6 +8,18 @@ from openprocurement.tender.belowthreshold.tests.base import (
     test_organization,
     test_lots
 )
+from openprocurement.tender.belowthreshold.tests.auction import (
+    TenderAuctionResourceTestMixin,
+    TenderLotAuctionResourceTestMixin,
+    TenderMultipleLotAuctionResourceTestMixin
+)
+from openprocurement.tender.belowthreshold.tests.auction_blanks import (
+    # TenderSameValueAuctionResourceTest
+    post_tender_auction_reversed,
+    post_tender_auction_not_changed,
+    # TenderFeaturesAuctionResourceTest
+    get_tender_auction_feature,
+)
 
 from openprocurement.tender.openeu.tests.base import (
     BaseTenderContentWebTest,
@@ -15,31 +27,12 @@ from openprocurement.tender.openeu.tests.base import (
     test_bids
 )
 from openprocurement.tender.openeu.tests.auction_blanks import (
-    # TenderFeaturesAuctionResourceTest
-    get_tender_features_auction,
     # TenderMultipleLotAuctionResourceTest
-    get_tender_2lot_auction,
-    post_tender_2lot_auction,
     patch_tender_2lot_auction,
-    post_tender_2lot_auction_document,
-    # TenderLotAuctionResourceTest
-    get_tender_lot_auction,
-    post_tender_lot_auction,
-    patch_tender_lot_auction,
-    post_tender_lot_auction_document,
-    # TenderSameValueAuctionResourceTest
-    post_tender_auction_not_changed,
-    post_tender_auction_reversed,
-    # TenderAuctionResourceTest
-    get_tender_auction_not_found,
-    get_tender_auction,
-    post_tender_auction,
-    patch_tender_auction,
-    post_tender_auction_document,
 )
 
 
-class TenderAuctionResourceTest(BaseTenderContentWebTest):
+class TenderAuctionResourceTest(BaseTenderContentWebTest, TenderAuctionResourceTestMixin):
     #initial_data = tender_data
     initial_auth = ('Basic', ('broker', ''))
     initial_bids = test_bids
@@ -73,12 +66,6 @@ class TenderAuctionResourceTest(BaseTenderContentWebTest):
                                        {"data": {"status": "active.pre-qualification.stand-still"}})
         self.assertEqual(response.status, "200 OK")
         # # switch to active.pre-qualification.stand-still
-
-    test_get_tender_auction_not_found = snitch(get_tender_auction_not_found)
-    test_get_tender_auction = snitch(get_tender_auction)
-    test_post_tender_auction = snitch(post_tender_auction)
-    test_patch_tender_auction = snitch(patch_tender_auction)
-    test_post_tender_auction_document = snitch(post_tender_auction_document)
 
 
 class TenderSameValueAuctionResourceTest(BaseTenderContentWebTest):
@@ -136,23 +123,15 @@ class TenderSameValueAuctionResourceTest(BaseTenderContentWebTest):
     test_post_tender_auction_reversed = snitch(post_tender_auction_reversed)
 
 
-class TenderLotAuctionResourceTest(TenderAuctionResourceTest):
+class TenderLotAuctionResourceTest(TenderLotAuctionResourceTestMixin, TenderAuctionResourceTest):
     initial_lots = test_lots
     # initial_data = test_tender_data
 
-    test_get_tender_auction = snitch(get_tender_lot_auction)
-    test_post_tender_auction = snitch(post_tender_lot_auction)
-    test_patch_tender_auction = snitch(patch_tender_lot_auction)
-    test_post_tender_auction_document = snitch(post_tender_lot_auction_document)
 
-
-class TenderMultipleLotAuctionResourceTest(TenderAuctionResourceTest):
+class TenderMultipleLotAuctionResourceTest(TenderMultipleLotAuctionResourceTestMixin, TenderAuctionResourceTest):
     initial_lots = 2 * test_lots
 
-    test_get_tender_auction = snitch(get_tender_2lot_auction)
-    test_post_tender_auction = snitch(post_tender_2lot_auction)
     test_patch_tender_auction = snitch(patch_tender_2lot_auction)
-    test_post_tender_auction_document = snitch(post_tender_2lot_auction_document)
 
 
 class TenderFeaturesAuctionResourceTest(BaseTenderContentWebTest):
@@ -200,7 +179,7 @@ class TenderFeaturesAuctionResourceTest(BaseTenderContentWebTest):
         }
     ]
 
-    test_get_tender_auction = snitch(get_tender_features_auction)
+    test_get_tender_auction = snitch(get_tender_auction_feature)
 
 
 def suite():

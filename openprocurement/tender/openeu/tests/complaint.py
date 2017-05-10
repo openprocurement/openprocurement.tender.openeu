@@ -3,53 +3,50 @@ import unittest
 
 from openprocurement.api.tests.base import snitch
 
-from openprocurement.tender.openeu.tests.base import test_lots
-from openprocurement.tender.openeu.tests.base import (
-    BaseTenderContentWebTest,
-    test_bids,
-)
-from openprocurement.tender.openeu.tests.complaint_blanks import (
+from openprocurement.tender.belowthreshold.tests.complaint import TenderComplaintResourceTestMixin
+from openprocurement.tender.belowthreshold.tests.complaint_blanks import (
     # TenderComplaintDocumentResourceTest
     not_found,
     create_tender_complaint_document,
-    put_tender_complaint_document,
+)
+
+from openprocurement.tender.openua.tests.complaint import TenderUAComplaintResourceTestMixin
+from openprocurement.tender.openua.tests.complaint_blanks import (
+    # TenderComplaintDocumentResourceTest
     patch_tender_complaint_document,
     # TenderLotAwardComplaintResourceTest
-    lot_create_tender_complaint,
-    # TenderComplaintResourceTest
-    create_tender_complaint_invalid,
-    create_tender_complaint,
-    patch_tender_complaint,
-    review_tender_complaint,
-    get_tender_complaint,
-    get_tender_complaints,
+    create_tender_lot_award_complaint,
+)
+
+from openprocurement.tender.openeu.tests.complaint_blanks import (
+    # TenderComplaintDocumentResourceTest
+    put_tender_complaint_document,
+)
+from openprocurement.tender.openeu.tests.base import (
+    BaseTenderContentWebTest,
+    test_bids,
+    test_lots,
 )
 
 
-class TenderComplaintResourceTest(BaseTenderContentWebTest):
-
-    author = test_bids[0]["tenderers"][0]
+class TenderComplaintResourceTest(BaseTenderContentWebTest,
+                                  TenderComplaintResourceTestMixin,
+                                  TenderUAComplaintResourceTestMixin):
     initial_auth = ('Basic', ('broker', ''))
-
-    test_create_tender_complaint_invalid = snitch(create_tender_complaint_invalid)
-    test_create_tender_complaint = snitch(create_tender_complaint)
-    test_patch_tender_complaint = snitch(patch_tender_complaint)
-    test_review_tender_complaint = snitch(review_tender_complaint)
-    test_get_tender_complaint = snitch(get_tender_complaint)
-    test_get_tender_complaints = snitch(get_tender_complaints)
+    test_author = test_bids[0]["tenderers"][0]
 
 
 class TenderLotAwardComplaintResourceTest(BaseTenderContentWebTest):
     initial_lots = test_lots
-    author = test_bids[0]["tenderers"][0]
+    test_author = test_bids[0]["tenderers"][0]
     initial_auth = ('Basic', ('broker', ''))
 
-    test_create_tender_complaint = snitch(lot_create_tender_complaint)
+    test_create_tender_complaint = snitch(create_tender_lot_award_complaint)
 
 
 class TenderComplaintDocumentResourceTest(BaseTenderContentWebTest):
 
-    author = test_bids[0]["tenderers"][0]
+    test_author = test_bids[0]["tenderers"][0]
     initial_auth = ('Basic', ('broker', ''))
 
     def setUp(self):
@@ -58,7 +55,7 @@ class TenderComplaintDocumentResourceTest(BaseTenderContentWebTest):
         response = self.app.post_json('/tenders/{}/complaints'.format(
             self.tender_id), {'data': {'title': 'complaint title',
                                        'description': 'complaint description',
-                                       'author': self.author
+                                       'author': test_bids[0]["tenderers"][0]
                                        }})
         complaint = response.json['data']
         self.complaint_id = complaint['id']

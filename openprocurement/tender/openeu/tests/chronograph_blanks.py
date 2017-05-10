@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from copy import deepcopy
 
-from openprocurement.tender.belowthreshold.tests.base import test_organization
-
 # TenderSwitchPreQualificationResourceTest
 
 
@@ -33,37 +31,12 @@ def switch_to_auction(self):
         self.assertEqual(response.content_type, 'application/json')
         self.assertEqual(response.json['data']["status"], "active.auction")
 
-# TenderSwitchUnsuccessfulResourceTest
-
-
-def switch_to_unsuccessful(self):
-        self.set_status('active.pre-qualification', {'status': self.initial_status})
-        self.app.authorization = ('Basic', ('chronograph', ''))
-        response = self.app.patch_json('/tenders/{}'.format(self.tender_id), {'data': {'id': self.tender_id}})
-        self.assertEqual(response.status, '200 OK')
-        self.assertEqual(response.content_type, 'application/json')
-        self.assertEqual(response.json['data']["status"], "unsuccessful")
-
-# TenderAuctionPeriodResourceTest
-
-
-def set_auction_period(self):
-    self.app.authorization = ('Basic', ('chronograph', ''))
-    response = self.app.patch_json('/tenders/{}'.format(self.tender_id),
-                                   {'data': {"auctionPeriod": {"startDate": "9999-01-01T00:00:00+00:00"}}})
-    self.assertEqual(response.status, '200 OK')
-    self.assertEqual(response.json['data']['auctionPeriod']['startDate'], '9999-01-01T00:00:00+00:00')
-
-    response = self.app.patch_json('/tenders/{}'.format(self.tender_id),
-                                   {'data': {"auctionPeriod": {"startDate": None}}})
-    self.assertEqual(response.status, '200 OK')
-    self.assertIn('auctionPeriod', response.json['data'])
 
 # TenderComplaintSwitchResourceTest
 
 
 def switch_to_complaint(self):
-        user_data = deepcopy(test_organization)
+        user_data = deepcopy(self.author_data)
         for status in ['invalid', 'resolved', 'declined']:
             response = self.app.post_json('/tenders/{}/complaints'.format(self.tender_id), {'data': {
                 'title': 'complaint title',

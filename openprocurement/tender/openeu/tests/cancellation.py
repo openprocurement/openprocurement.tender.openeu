@@ -3,28 +3,36 @@ import unittest
 
 from openprocurement.api.tests.base import snitch
 
+from openprocurement.tender.belowthreshold.tests.cancellation import (
+    TenderCancellationResourceTestMixin,
+    TenderCancellationDocumentResourceTestMixin
+)
+from openprocurement.tender.belowthreshold.tests.cancellation_blanks import (
+    # TenderLotsCancellationResourceTest
+    create_tender_lots_cancellation,
+    patch_tender_lots_cancellation,
+    # TenderLotCancellationResourceTest
+    create_tender_lot_cancellation,
+    patch_tender_lot_cancellation,
+)
+
+from openprocurement.tender.openua.tests.cancellation_blanks import (
+    # TenderCancellationResourceTest
+    create_tender_cancellation,
+    patch_tender_cancellation,
+)
+
 from openprocurement.tender.openeu.tests.base import (
     BaseTenderContentWebTest,
     test_bids,
     test_lots
 )
 from openprocurement.tender.openeu.tests.cancellation_blanks import (
-    # TenderCancellationDocumentResourceTest
-    not_found,
-    create_tender_cancellation_document,
-    put_tender_cancellation_document,
-    patch_tender_cancellation_document,
     # TenderAwardsCancellationResourceTest
     cancellation_active_qualification,
     cancellation_unsuccessful_qualification,
     cancellation_active_award,
     cancellation_unsuccessful_award,
-    # TenderLotsCancellationResourceTest
-    create_tender_2lots_cancellation,
-    patch_tender_2lots_cancellation,
-    # TenderLotCancellationResourceTest
-    lot_create_tender_cancellation,
-    lot_patch_tender_cancellation,
     # TenderCancellationBidsAvailabilityTest
     bids_on_tender_cancellation_in_tendering,
     bids_on_tender_cancellation_in_pre_qualification,
@@ -32,24 +40,15 @@ from openprocurement.tender.openeu.tests.cancellation_blanks import (
     bids_on_tender_cancellation_in_auction,
     bids_on_tender_cancellation_in_qualification,
     bids_on_tender_cancellation_in_awarded,
-    # TenderCancellationResourceTest
-    create_tender_cancellation_invalid,
-    create_tender_cancellation,
-    patch_tender_cancellation,
-    get_tender_cancellation,
-    get_tender_cancellations,
 )
 
 
-class TenderCancellationResourceTest(BaseTenderContentWebTest):
+class TenderCancellationResourceTest(BaseTenderContentWebTest, TenderCancellationResourceTestMixin):
 
     initial_auth = ('Basic', ('broker', ''))
 
-    test_create_tender_cancellation_invalid = snitch(create_tender_cancellation_invalid)
     test_create_tender_cancellation = snitch(create_tender_cancellation)
     test_patch_tender_cancellation = snitch(patch_tender_cancellation)
-    test_get_tender_cancellation = snitch(get_tender_cancellation)
-    test_get_tender_cancellations = snitch(get_tender_cancellations)
 
 
 class TenderCancellationBidsAvailabilityTest(BaseTenderContentWebTest):
@@ -213,16 +212,16 @@ class TenderLotCancellationResourceTest(BaseTenderContentWebTest):
 
     initial_auth = ('Basic', ('broker', ''))
 
-    test_create_tender_cancellation = snitch(lot_create_tender_cancellation)
-    test_patch_tender_cancellation = snitch(lot_patch_tender_cancellation)
+    test_create_tender_cancellation = snitch(create_tender_lot_cancellation)
+    test_patch_tender_cancellation = snitch(patch_tender_lot_cancellation)
 
 
 class TenderLotsCancellationResourceTest(BaseTenderContentWebTest):
     initial_lots = 2 * test_lots
 
     initial_auth = ('Basic', ('broker', ''))
-    test_create_tender_cancellation = snitch(create_tender_2lots_cancellation)
-    test_patch_tender_cancellation = snitch(patch_tender_2lots_cancellation)
+    test_create_tender_cancellation = snitch(create_tender_lots_cancellation)
+    test_patch_tender_cancellation = snitch(patch_tender_lots_cancellation)
 
 
 class TenderAwardsCancellationResourceTest(BaseTenderContentWebTest):
@@ -236,7 +235,7 @@ class TenderAwardsCancellationResourceTest(BaseTenderContentWebTest):
     test_cancellation_unsuccessful_award = snitch(cancellation_unsuccessful_award)
 
 
-class TenderCancellationDocumentResourceTest(BaseTenderContentWebTest):
+class TenderCancellationDocumentResourceTest(BaseTenderContentWebTest, TenderCancellationDocumentResourceTestMixin):
 
     initial_auth = ('Basic', ('broker', ''))
 
@@ -247,11 +246,6 @@ class TenderCancellationDocumentResourceTest(BaseTenderContentWebTest):
             self.tender_id, self.tender_token), {'data': {'reason': 'cancellation reason'}})
         cancellation = response.json['data']
         self.cancellation_id = cancellation['id']
-
-    test_not_found = snitch(not_found)
-    test_create_tender_cancellation_document= snitch(create_tender_cancellation_document)
-    test_put_tender_cancellation_document= snitch(put_tender_cancellation_document)
-    test_patch_tender_cancellation_document= snitch(patch_tender_cancellation_document)
 
 
 def suite():
