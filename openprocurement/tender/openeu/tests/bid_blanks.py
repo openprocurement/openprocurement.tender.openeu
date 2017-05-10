@@ -581,7 +581,7 @@ def delete_tender_bidder(self):
 def deleted_bid_is_not_restorable(self):
     response = self.app.post_json('/tenders/{}/bids'.format(
         self.tender_id), {'data': {'selfEligible': True, 'selfQualified': True,
-                                   'tenderers': self.test_bids_data[0]['tenderers'], "value": {"amount": 500}}})
+                                   'tenderers': [self.author_data], "value": {"amount": 500}}})
     self.assertEqual(response.status, '201 Created')
     self.assertEqual(response.content_type, 'application/json')
     bid = response.json['data']
