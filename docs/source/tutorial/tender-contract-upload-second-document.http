@@ -1,23 +1,23 @@
-POST /api/2.3/tenders/9796c1eae0ea423990752b84b4b42136/contracts/755bd36bc765488684c9c36fa606571e/documents?acc_token=0bbf71fb2ed84a1e8c6904c373baa94a HTTP/1.0
+POST /api/2.3/tenders/10d15d00e6e345adb1379ae9717ff733/contracts/a6af35ebb71f41eabaae61833fe46c17/documents?acc_token=0bee20f4b4c742228cb56ae02d4d38aa HTTP/1.0
 Authorization: Basic YnJva2VyOg==
-Content-Length: 207
-Content-Type: multipart/form-data; boundary=----------a_BoUnDaRy334815312665$
+Content-Length: 213
+Content-Type: multipart/form-data; boundary=----------a_BoUnDaRy000699330939408$
 Host: api-sandbox.openprocurement.org
 
 Response: 201 Created
 Content-Type: application/json; charset=UTF-8
-Location: http://api-sandbox.openprocurement.org/api/2.3/tenders/9796c1eae0ea423990752b84b4b42136/contracts/755bd36bc765488684c9c36fa606571e/documents/c8295cd72a67420ebe59ad2752cf8125
+Location: http://api-sandbox.openprocurement.org/api/2.3/tenders/10d15d00e6e345adb1379ae9717ff733/contracts/a6af35ebb71f41eabaae61833fe46c17/documents/a73ff236daef40eca7d7557f06383589
 {
   "data": {
     "hash": "md5:00000000000000000000000000000000", 
     "language": "uk", 
     "title": "contract_second_document.doc", 
-    "url": "http://public.docs-sandbox.openprocurement.org/get/38dac496a83d468b84d026e45b8fc88b?KeyID=17b2e1e5&Signature=65R4MHWKuBjJR4PRt3NjCORTCCpAOjaybG7IVhQ3R%252BiE45DE7yivjgNWJtnx2Ubqa4kHaSJ3Xy8N%252BZYmD9F3CA%253D%253D", 
+    "url": "http://public.docs-sandbox.openprocurement.org/get/138160518dc74dfebeab1d495ace5b22?KeyID=685c36f8&Signature=94pH4esn9M%252B1HTcti7yhmyjVQL3znIL2zrjO8N%2FQCDYZlWSHENmS0BZyo6tqE0IObIOYGtw8XblARrvTFk8iAA%253D%253D", 
     "format": "application/msword", 
     "documentOf": "tender", 
-    "datePublished": "2017-06-19T19:46:29.471402+03:00", 
-    "id": "c8295cd72a67420ebe59ad2752cf8125", 
-    "dateModified": "2017-06-19T19:46:29.471446+03:00"
+    "datePublished": "2017-09-05T14:33:10.053424+03:00", 
+    "id": "a73ff236daef40eca7d7557f06383589", 
+    "dateModified": "2017-09-05T14:33:10.053444+03:00"
   }
 }
 
