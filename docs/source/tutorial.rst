@@ -173,14 +173,16 @@ Enquiries can be made only during ``Tender.enqueryPeriod``
 Registering bid
 ---------------
 
+Bid registration
+~~~~~~~~~~~~~~~~
+
 Tender status ``active.tendering`` allows registration of bids.
 
-Bidder can register a bid with ``draft`` status:
+Bidder can register a bid with `draft` status:
 
 .. include:: tutorial/register-bidder.http
    :code:
-
-and approve to ``pending`` status:
+anjd approve to pending status:
 
 .. include:: tutorial/activate-bidder.http
    :code:
@@ -338,9 +340,7 @@ Procuring entity approves qualifications by switching to next status:
 .. include:: tutorial/pre-qualification-confirmation.http
    :code:
 
-If qualification has been cancelled, new `Qualification` object is generated for this participant.
-
-.. You may notice 10 day stand-still time set in `qualificationPeriod`.
+You may notice 10 day stand-still time set in `qualificationPeriod`.
 
 Auction
 -------
@@ -371,7 +371,7 @@ Qualification commission registers its decision via the following call:
 Setting  contract value
 -----------------------
 
-By default contract value is set based on the award, but there is a possibility to set custom contract value. 
+By default contract value is set based on the award, but there is a possibility to set custom contract value.
 
 If you want to **lower contract value**, you can insert new one into the `amount` field.
 
