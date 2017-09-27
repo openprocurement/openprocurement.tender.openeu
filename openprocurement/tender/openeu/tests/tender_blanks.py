@@ -164,6 +164,27 @@ def create_tender_invalid(self):
         {u'description': [u'tenderPeriod.startDate should be in greater than current date'], u'location': u'body', u'name': u'tenderPeriod'}
     ])
 
+    response = self.app.post_json('/tenders', {'data': self.initial_data})
+    self.assertEqual(response.status, '201 Created')
+    tender = response.json['data']
+    self.tender_id = response.json['data']['id']
+    owner_token = response.json['access']['token']
+
+    response = self.app.patch_json('/tenders/{}?acc_token={}'.format(tender['id'], owner_token),
+                                   {'data': {'tenderPeriod': {'startDate': tender['enquiryPeriod']['endDate']}}},
+                                   status=422
+                                   )
+    self.assertEqual(response.status, '422 Unprocessable Entity')
+    self.assertEqual(response.content_type, 'application/json')
+    self.assertEqual(response.json['errors'], [{
+        "location": "body",
+        "name": "tenderPeriod",
+        "description": [
+            u"tenderPeriod should be greater than 30 days"
+        ]
+    }
+    ])
+
     now = get_now()
     self.initial_data['awardPeriod'] = {'startDate': now.isoformat(), 'endDate': now.isoformat()}
     response = self.app.post_json(request_path, {'data': self.initial_data}, status=422)
