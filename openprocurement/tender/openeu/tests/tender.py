@@ -12,6 +12,7 @@ from openprocurement.tender.belowthreshold.tests.tender_blanks import (
 )
 
 from openprocurement.tender.openua.tests.tender import TenderUAResourceTestMixin
+from openprocurement.tender.openua.tests.tender_blanks import patch_tenderPeriod
 
 from openprocurement.tender.openeu.tests.base import (
     test_tender_data,
@@ -51,6 +52,7 @@ class TenderResourceTest(BaseTenderWebTest, TenderResourceTestMixin, TenderUARes
     initial_data = test_tender_data
     test_lots_data = test_lots  # TODO: change attribute identifier
     test_bids_data = test_bids
+    tender_period_days = 30
 
     test_create_tender_invalid = snitch(create_tender_invalid)
     test_create_tender_generated = snitch(create_tender_generated)
