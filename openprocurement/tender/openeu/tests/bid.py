@@ -7,12 +7,7 @@ from openprocurement.tender.belowthreshold.tests.base import (
     test_organization,
 )
 
-from openprocurement.tender.belowthreshold.tests.bid_blanks import (
-    # TenderBidBatchDocumentWithDSResourceTest
-    create_tender_bid_with_documents,
-    create_tender_bid_with_document_invalid,
-    create_tender_bid_with_document,
-)
+from openprocurement.tender.belowthreshold.tests.bid import TenderBidBatchDocumentWithDSResourceTestMixin
 
 from openprocurement.tender.openeu.tests.base import (
     BaseTenderContentWebTest,
@@ -145,7 +140,7 @@ class TenderBidDocumentWithDSResourceTest(TenderBidDocumentResourceTest):
     docservice = True
 
 
-class TenderBidBatchDocumentsWithDSResourceTest(BaseTenderContentWebTest):
+class TenderBidBatchDocumentsWithDSResourceTest(BaseTenderContentWebTest, TenderBidBatchDocumentWithDSResourceTestMixin):
     docservice = True
     initial_status = 'active.tendering'
 
@@ -156,10 +151,6 @@ class TenderBidBatchDocumentsWithDSResourceTest(BaseTenderContentWebTest):
                         'selfQualified': True,
                         'documents': []
         }
-
-    test_create_tender_bid_with_document_invalid = snitch(create_tender_bid_with_document_invalid)
-    test_create_tender_bid_with_document = snitch(create_tender_bid_with_document)
-    test_create_tender_bid_with_documents = snitch(create_tender_bid_with_documents)
 
     test_create_tender_bid_with_eligibility_document_invalid = snitch(create_tender_bid_with_eligibility_document_invalid)
     test_create_tender_bid_with_eligibility_document = snitch(create_tender_bid_with_eligibility_document)
