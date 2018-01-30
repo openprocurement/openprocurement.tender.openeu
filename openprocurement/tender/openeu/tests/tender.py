@@ -51,6 +51,7 @@ class TenderResourceTest(BaseTenderWebTest, TenderResourceTestMixin, TenderUARes
     initial_data = test_tender_data
     test_lots_data = test_lots  # TODO: change attribute identifier
     test_bids_data = test_bids
+    tender_period_days = {'first': 30, 'second': 7}
 
     test_create_tender_invalid = snitch(create_tender_invalid)
     test_create_tender_generated = snitch(create_tender_generated)
