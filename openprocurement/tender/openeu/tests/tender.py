@@ -34,6 +34,7 @@ from openprocurement.tender.openeu.tests.tender_blanks import (
     invalid_bid_tender_lot,
     #TenderTest
     simple_add_tender,
+    switch_bid_status_unsuccessul_to_active,
 )
 
 
@@ -58,6 +59,7 @@ class TenderResourceTest(BaseTenderWebTest, TenderResourceTestMixin, TenderUARes
     test_guarantee = snitch(guarantee)
     test_invalid_bid_tender_features = snitch(invalid_bid_tender_features)
     test_invalid_bid_tender_lot = snitch(invalid_bid_tender_lot)
+    test_switch_bid_status_unsuccessul_to_active = snitch(switch_bid_status_unsuccessul_to_active)
 
 
     def test_patch_not_author(self):
