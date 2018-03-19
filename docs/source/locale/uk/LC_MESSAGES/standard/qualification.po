@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: openprocurement.tender.openeu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-16 12:53+0200\n"
-"PO-Revision-Date: 2016-03-21 15:08+0200\n"
+"PO-Revision-Date: 2016-09-16 12:49+0200\n"
 "Last-Translator: Zoriana Zaiats <sorenabell@quintagroup.com>\n"
 "Language-Team: Ukrainian <support@quintagroup.com>\n"
 "MIME-Version: 1.0\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
 "=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: ../../source/standard/qualification.rst:7
 msgid "Qualification"
@@ -38,22 +38,6 @@ msgstr "рядок"
 #: ../../source/standard/qualification.rst:61
 msgid "Possible values are:"
 msgstr "Можливі значення:"
-
-#: ../../source/standard/qualification.rst:63
-msgid "`pending`"
-msgstr "`pending` - очікується кваліфікація"
-
-#: ../../source/standard/qualification.rst:64
-msgid "`active`"
-msgstr "`active` - кваліфікація активна"
-
-#: ../../source/standard/qualification.rst:65
-msgid "`unsuccessful`"
-msgstr "`unsuccessful` - кваліфікація неуспішна"
-
-#: ../../source/standard/qualification.rst:66
-msgid "`cancelled`"
-msgstr "`cancelled` - кваліфікація відмінена"
 
 #: ../../source/standard/qualification.rst:45
 msgid "In Multilot tenders, lot that this Qualification protocol relates to."
@@ -124,4 +108,19 @@ msgstr ""
 "Підтверджує відсутність підстав для відмови від участі відповідно до статті "
 "17 Закону України \"Про державні закупівлі\"."
 
+#: ../../source/standard/qualification.rst:63
+msgid "`pending` - waiting for qualification"
+msgstr "`pending` - очікує на кваліфікацію"
+
+#: ../../source/standard/qualification.rst:64
+msgid "`active` - qualification has been confirmed"
+msgstr "`active` - кваліфікацію підтверджено"
+
+#: ../../source/standard/qualification.rst:65
+msgid "`unsuccessful` - participant didn't pass qualification"
+msgstr "`unsuccessful` - учасник не пройшов кваліфікації"
+
+#: ../../source/standard/qualification.rst:66
+msgid "`cancelled`- qualification decision has been cancelled"
+msgstr "`cancelled`- відміна рішення по кваліфікації"
 

@@ -1,61 +1,62 @@
-#
+# Zoriana Zaiats <sorenabell@quintagroup.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: openprocurement.tender.openeu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-16 12:53+0200\n"
-"PO-Revision-Date: 2016-10-19 17:36+0200\n"
+"PO-Revision-Date: 2016-09-16 12:48+0200\n"
 "Last-Translator: Zoriana Zaiats <sorenabell@quintagroup.com>\n"
 "Language-Team: Ukrainian <support@quintagroup.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: uk\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
-"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: ../../source/tutorial.rst:4
+#: ../../source/tutorial.rst:3
 msgid "Tutorial"
 msgstr "Туторіал"
 
-#: ../../source/tutorial.rst:7
+#: ../../source/tutorial.rst:6
 msgid "Exploring basic rules"
 msgstr "Базові правила"
 
-#: ../../source/tutorial.rst:9
+#: ../../source/tutorial.rst:8
 msgid "Let's try exploring the `/tenders` endpoint:"
 msgstr "Подивимось як працює точка входу `/tenders`:"
 
-#: ../../source/tutorial.rst:14
+#: ../../source/tutorial.rst:13
 msgid "Just invoking it reveals empty set."
 msgstr "При виклику видає пустий набір."
 
-#: ../../source/tutorial.rst:16
+#: ../../source/tutorial.rst:15
 msgid "Now let's attempt creating some tender:"
 msgstr "Спробуймо створити нову закупівлю:"
 
-#: ../../source/tutorial.rst:21
-msgid "Error states that the only accepted Content-Type is `application/json`."
-msgstr "Помилка вказує, що єдиний прийнятний тип вмісту це `application/json`."
+#: ../../source/tutorial.rst:20
+msgid ""
+"Error states that the only accepted Content-Type is `application/json`."
+msgstr ""
+"Помилка вказує, що єдиний прийнятний тип вмісту це `application/json`."
 
-#: ../../source/tutorial.rst:23
+#: ../../source/tutorial.rst:22
 msgid "Let's satisfy the Content-type requirement:"
 msgstr "Задовільнимо вимогу типу вмісту:"
 
-#: ../../source/tutorial.rst:28
+#: ../../source/tutorial.rst:27
 msgid "Error states that no `data` has been found in JSON body."
 msgstr "Помилка вказує, що `data` не знайдено у тілі JSON."
 
-#: ../../source/tutorial.rst:34
+#: ../../source/tutorial.rst:33
 msgid "Creating tender"
 msgstr "Створення закупівлі"
 
-#: ../../source/tutorial.rst:36
+#: ../../source/tutorial.rst:35
 msgid "Let's provide the data attribute in the submitted body :"
 msgstr "Введемо data атрибут у поданому тілі:"
 
-#: ../../source/tutorial.rst:41
+#: ../../source/tutorial.rst:40
 msgid ""
 "Success! Now we can see that new object was created. Response code is `201` "
 "and `Location` response header reports the location of the created object.  "
@@ -72,7 +73,7 @@ msgstr ""
 "модифікувалась. Зверніть увагу, що закупівля створюється зі статусом "
 "`active.tendering`."
 
-#: ../../source/tutorial.rst:48
+#: ../../source/tutorial.rst:47
 msgid ""
 "The peculiarity of the Open EU procedure is that ``procurementMethodType`` "
 "was changed from ``belowThreshold`` to ``aboveThresholdEU``. Also there is "
@@ -84,21 +85,21 @@ msgstr ""
 "``aboveThresholdEU``.  Також тут неможливо встановити ``enquiryPeriod``, бо "
 "він буде призначений автоматично."
 
-#: ../../source/tutorial.rst:51
+#: ../../source/tutorial.rst:50
 msgid ""
 "Let's access the URL of the created object (the `Location` header of the "
 "response):"
 msgstr "Використаємо URL створеного об’єкта (заголовок відповіді `Location`):"
 
-#: ../../source/tutorial.rst:58
+#: ../../source/tutorial.rst:57
 msgid "We can see the same response we got after creating tender."
 msgstr "Ми бачимо ту ж відповідь, що і після створення закупівлі."
 
-#: ../../source/tutorial.rst:60
+#: ../../source/tutorial.rst:59
 msgid "Let's see what listing of tenders reveals us:"
 msgstr "Подивимось, що показує список закупівель:"
 
-#: ../../source/tutorial.rst:65
+#: ../../source/tutorial.rst:64
 msgid ""
 "We do see the internal `id` of a tender (that can be used to construct full "
 "URL by prepending `http://api-sandbox.openprocurement.org/api/0/tenders/`) "
@@ -108,16 +109,16 @@ msgstr ""
 "повної URL-адреси, якщо додати `http://api-"
 "sandbox.openprocurement.org/api/0/tenders/`) та її `dateModified` дату."
 
-#: ../../source/tutorial.rst:68
+#: ../../source/tutorial.rst:67
 msgid "Modifying tender"
 msgstr "Редагування закупівлі"
 
-#: ../../source/tutorial.rst:70
+#: ../../source/tutorial.rst:69
 msgid ""
 "Let's update tender by supplementing it with all other essential properties:"
 msgstr "Оновимо закупівлю шляхом надання їй усіх інших важливих властивостей:"
 
-#: ../../source/tutorial.rst:77
+#: ../../source/tutorial.rst:76
 msgid ""
 "We see the added properies have merged with existing tender data. "
 "Additionally, the `dateModified` property was updated to reflect the last "
@@ -127,11 +128,11 @@ msgstr ""
 "Додатково оновлена властивість `dateModified`, щоб відображати останню дату "
 "модифікації."
 
-#: ../../source/tutorial.rst:79
+#: ../../source/tutorial.rst:78
 msgid "Checking the listing again reflects the new modification date:"
 msgstr "Ще одна перевірка списку відображає нову дату модифікації:"
 
-#: ../../source/tutorial.rst:84
+#: ../../source/tutorial.rst:83
 msgid ""
 "Procuring entity can not change tender if there are less than 7 days before "
 "tenderPeriod ends. Changes will not be accepted by API."
@@ -139,17 +140,17 @@ msgstr ""
 "Замовник не може редагувати закупівлю, якщо залишилось менше 7 днів до "
 "завершення періоду подання пропозицій. API таких змін не прийме."
 
-#: ../../source/tutorial.rst:89
+#: ../../source/tutorial.rst:88
 msgid "That is why tenderPeriod has to be extended by 7 days."
 msgstr ""
 "Ось чому потрібно продовжити період подання пропозицій (`tenderPeriod`) на 7"
 " днів."
 
-#: ../../source/tutorial.rst:103
+#: ../../source/tutorial.rst:102
 msgid "Uploading documentation"
 msgstr "Завантаження документів"
 
-#: ../../source/tutorial.rst:105
+#: ../../source/tutorial.rst:104
 msgid ""
 "Procuring entity can upload PDF files into the created tender. Uploading "
 "should follow the :ref:`upload` rules."
@@ -157,7 +158,7 @@ msgstr ""
 "Замовник може завантажити PDF файл у створену закупівлю. Завантаження "
 "повинно відбуватись згідно правил :ref:`upload`."
 
-#: ../../source/tutorial.rst:111
+#: ../../source/tutorial.rst:110
 msgid ""
 "`201 Created` response code and `Location` header confirm document creation."
 " We can additionally query the `documents` collection API endpoint to "
@@ -167,7 +168,7 @@ msgstr ""
 "документ було створено. Додатково можна зробити запит точки входу API "
 "колекції документів (`documents`), щоб підтвердити дію:"
 
-#: ../../source/tutorial.rst:118
+#: ../../source/tutorial.rst:117
 msgid ""
 "The single array element describes the uploaded document. We can upload more"
 " documents:"
@@ -175,11 +176,11 @@ msgstr ""
 "Один елемент масиву описує завантажений документ. Ми можемо завантажити "
 "більше документів:"
 
-#: ../../source/tutorial.rst:123
+#: ../../source/tutorial.rst:122
 msgid "And again we can confirm that there are two documents uploaded."
 msgstr "І знову можна перевірити, що є два завантажених документа."
 
-#: ../../source/tutorial.rst:128
+#: ../../source/tutorial.rst:127
 msgid ""
 "In case we made an error, we can reupload the document over the older "
 "version:"
@@ -187,15 +188,15 @@ msgstr ""
 "Якщо сталась помилка, ми можемо ще раз завантажити документ поверх старої "
 "версії:"
 
-#: ../../source/tutorial.rst:133
+#: ../../source/tutorial.rst:132
 msgid "And we can see that it is overriding the original version:"
 msgstr "І ми бачимо, що вона перекриває оригінальну версію:"
 
-#: ../../source/tutorial.rst:142
+#: ../../source/tutorial.rst:141
 msgid "Enquiries"
 msgstr "Уточнення і запитання"
 
-#: ../../source/tutorial.rst:144
+#: ../../source/tutorial.rst:143
 msgid ""
 "When tender has ``active.tendering`` status and "
 "``Tender.enqueryPeriod.endDate``  hasn't come yet, interested parties can "
@@ -206,49 +207,49 @@ msgstr ""
 "зацікавлені учасники можуть задавати питання чи просити уточнень умов "
 "закупівлі:"
 
-#: ../../source/tutorial.rst:149
+#: ../../source/tutorial.rst:148
 msgid "Procuring entity can answer them:"
 msgstr "Замовник може відповісти на них:"
 
-#: ../../source/tutorial.rst:154
+#: ../../source/tutorial.rst:153
 msgid "One can retrieve either questions list:"
 msgstr "Можна отримати список запитань:"
 
-#: ../../source/tutorial.rst:159
+#: ../../source/tutorial.rst:158
 msgid "or individual answer:"
 msgstr "або окрему відповідь:"
 
-#: ../../source/tutorial.rst:165
+#: ../../source/tutorial.rst:164
 msgid "Enquiries can be made only during ``Tender.enqueryPeriod``"
 msgstr ""
 "Запитання можна задавати лише протягом періоду уточнень "
 "``Tender.enqueryPeriod``."
 
-#: ../../source/tutorial.rst:174
+#: ../../source/tutorial.rst:173
 msgid "Registering bid"
 msgstr "Реєстрація пропозиції"
 
-#: ../../source/tutorial.rst:179
+#: ../../source/tutorial.rst:175
 msgid "Tender status ``active.tendering`` allows registration of bids."
 msgstr "Статус закупівлі ``active.tendering`` дозволяє подання пропозицій."
 
-#: ../../source/tutorial.rst:191
+#: ../../source/tutorial.rst:188
 msgid "Proposal Uploading"
 msgstr "Завантаження пропозиції"
 
-#: ../../source/tutorial.rst:193
+#: ../../source/tutorial.rst:190
 msgid "Then bidder should upload proposal technical document(s):"
 msgstr "Потім учасник повинен завантажити документ(и) пропозиції:"
 
-#: ../../source/tutorial.rst:226
+#: ../../source/tutorial.rst:223
 msgid "It is possible to check the uploaded documents:"
 msgstr "Можна перевірити завантажені документи:"
 
-#: ../../source/tutorial.rst:271
+#: ../../source/tutorial.rst:268
 msgid "Bid invalidation"
 msgstr "Пропозиція стає недійсною"
 
-#: ../../source/tutorial.rst:273
+#: ../../source/tutorial.rst:270
 msgid ""
 "If tender is modified, status of all bid proposals will be changed to "
 "``invalid``. Bid proposal will look the following way after tender has been "
@@ -258,15 +259,15 @@ msgstr ""
 "``invalid`` (недійсний). Ось так пропозиція буде виглядати після редагування"
 " закупівлі:"
 
-#: ../../source/tutorial.rst:279
+#: ../../source/tutorial.rst:276
 msgid "Bid confirmation"
 msgstr "Підтвердження пропозиції"
 
-#: ../../source/tutorial.rst:281
+#: ../../source/tutorial.rst:278
 msgid "Bidder should confirm bid proposal:"
 msgstr "Учасник повинен підтвердити свою пропозицію:"
 
-#: ../../source/tutorial.rst:286
+#: ../../source/tutorial.rst:283
 msgid ""
 "Open EU procedure demands at least two bidders, so there should be at least "
 "two bid proposals registered to move to auction stage:"
@@ -275,19 +276,19 @@ msgstr ""
 "відбулась, необхідно хоча б два учасника, тобто хоча б дві пропозиції "
 "повинні бути зареєстровані до початку аукціону:"
 
-#: ../../source/tutorial.rst:303
+#: ../../source/tutorial.rst:297
 msgid "Bid Qualification"
 msgstr "Кваліфікація пропозицій"
 
-#: ../../source/tutorial.rst:307
+#: ../../source/tutorial.rst:301
 msgid "Let's list qualifications:"
 msgstr "Переглянемо список кваліфікацій:"
 
-#: ../../source/tutorial.rst:346
+#: ../../source/tutorial.rst:342
 msgid "Auction"
 msgstr "Аукціон"
 
-#: ../../source/tutorial.rst:348
+#: ../../source/tutorial.rst:344
 msgid ""
 "After auction is scheduled anybody can visit it to watch. The auction can be"
 " reached at `Tender.auctionUrl`:"
@@ -295,12 +296,12 @@ msgstr ""
 "Після того, як аукціон заплановано, будь-хто може його відвідати для "
 "перегляду. Аукціон можна подивитись за допомогою `Tender.auctionUrl`:"
 
-#: ../../source/tutorial.rst:353
+#: ../../source/tutorial.rst:349
 msgid "Bidders can find out their participation URLs via their bids:"
 msgstr ""
 "Учасники можуть дізнатись свої URL-адреси для участі через свої пропозиції:"
 
-#: ../../source/tutorial.rst:358
+#: ../../source/tutorial.rst:354
 msgid ""
 "See the `Bid.participationUrl` in the response. Similar, but different, URL "
 "can be retrieved for other participants:"
@@ -308,19 +309,20 @@ msgstr ""
 "Дивіться на `Bid.participationUrl` у відповіді. Схожу, але іншу, URL-адресу "
 "можна отримати для інших учасників."
 
-#: ../../source/tutorial.rst:364
+#: ../../source/tutorial.rst:360
 msgid "Confirming qualification"
 msgstr "Підтвердження кваліфікації"
 
-#: ../../source/tutorial.rst:366
-msgid "Qualification commission registers its decision via the following call:"
+#: ../../source/tutorial.rst:362
+msgid ""
+"Qualification commission registers its decision via the following call:"
 msgstr "Кваліфікаційна комісія реєструє своє рішення:"
 
-#: ../../source/tutorial.rst:441
+#: ../../source/tutorial.rst:437
 msgid "Cancelling tender"
 msgstr "Скасування закупівлі"
 
-#: ../../source/tutorial.rst:443
+#: ../../source/tutorial.rst:439
 msgid ""
 "Tender creator can cancel tender anytime. The following steps should be "
 "applied:"
@@ -328,19 +330,19 @@ msgstr ""
 "Замовник може скасувати закупівлю у будь-який момент. Для цього виконайте "
 "наступні кроки:"
 
-#: ../../source/tutorial.rst:445
+#: ../../source/tutorial.rst:441
 msgid "Prepare cancellation request."
 msgstr "Приготуйте запит на скасування."
 
-#: ../../source/tutorial.rst:446
+#: ../../source/tutorial.rst:442
 msgid "Fill it with the protocol describing the cancellation reasons."
 msgstr "Наповніть його протоколом про причини скасування."
 
-#: ../../source/tutorial.rst:447
+#: ../../source/tutorial.rst:443
 msgid "Cancel the tender with the prepared reasons."
 msgstr "Скасуйте закупівлю через подані причини."
 
-#: ../../source/tutorial.rst:449
+#: ../../source/tutorial.rst:445
 msgid ""
 "Only the request that has been activated (3rd step above) has power to "
 "cancel tender.  I.e.  you have to not only prepare cancellation request but "
@@ -350,74 +352,82 @@ msgstr ""
 "тобто, для скасування закупівлі буде обов’язковим не тільки створити заявку,"
 " але і активувати її."
 
-#: ../../source/tutorial.rst:453
+#: ../../source/tutorial.rst:449
 msgid "See :ref:`cancellation` data structure for details."
 msgstr ""
 "Дивіться структуру запиту :ref:`cancellation` для більш детальної "
 "інформації."
 
-#: ../../source/tutorial.rst:456
+#: ../../source/tutorial.rst:452
 msgid "Preparing the cancellation request"
 msgstr "Формування запиту на скасування"
 
-#: ../../source/tutorial.rst:458
+#: ../../source/tutorial.rst:454
 msgid "You should pass `reason`, `status` defaults to `pending`."
 msgstr "Ви повинні передати змінні `reason`, `status` у стані `pending`."
 
-#: ../../source/tutorial.rst:460
+#: ../../source/tutorial.rst:456
 msgid "`id` is autogenerated and passed in the `Location` header of response."
 msgstr ""
 "`id` генерується автоматично і повертається у додатковому заголовку "
 "відповіді `Location`:"
 
-#: ../../source/tutorial.rst:473
+#: ../../source/tutorial.rst:469
 msgid "Filling cancellation with protocol and supplementary documentation"
 msgstr "Наповнення протоколом та іншою супровідною документацією"
 
-#: ../../source/tutorial.rst:475
+#: ../../source/tutorial.rst:471
 msgid "Upload the file contents"
 msgstr "Завантажте вміст файлу"
 
-#: ../../source/tutorial.rst:480
+#: ../../source/tutorial.rst:476
 msgid "Change the document description and other properties"
 msgstr "Змініть опис документа та інші властивості"
 
-#: ../../source/tutorial.rst:486
+#: ../../source/tutorial.rst:482
 msgid "Upload new version of the document"
 msgstr "Завантажте нову версію документа"
 
-#: ../../source/tutorial.rst:493
+#: ../../source/tutorial.rst:489
 msgid "Activating the request and cancelling tender"
 msgstr "Активація запиту та скасування закупівлі"
 
-#: ../../source/tutorial.rst:234
+#: ../../source/tutorial.rst:231
 msgid "Financial, eligibility and qualification documents uploading"
 msgstr ""
 "Завантаження документів, що підтверджують відповідність, фінансових та "
 "кваліфікаційних документів."
 
-#: ../../source/tutorial.rst:305
+#: ../../source/tutorial.rst:299
 msgid "Open EU procedure requires bid qualification."
 msgstr ""
 "Для відкритих торгів з публікацією англ. мовою необхідна кваліфікація "
 "пропозицій."
 
-#: ../../source/tutorial.rst:313
+#: ../../source/tutorial.rst:307
 msgid "Approve first two bids through qualification objects:"
 msgstr "Підтвердіть перші дві пропозиції через кваліфікаційні об’єкти:"
 
-#: ../../source/tutorial.rst:321
+#: ../../source/tutorial.rst:315
 msgid "We can also reject bid:"
 msgstr "Можна відхилити пропозицію:"
 
-#: ../../source/tutorial.rst:331
+#: ../../source/tutorial.rst:325
 msgid "Rejected bid is not shown in `bids/` listing."
 msgstr "Відхилена пропозиція не присутня в списку `bids/`."
 
-#: ../../source/tutorial.rst:333
+#: ../../source/tutorial.rst:327
 msgid "We can access rejected bid by id:"
 msgstr ""
 "Можна отримати доступ до відхиленої пропозиції за її ідентифікатором `id`:"
+
+#: ../../source/tutorial.rst:332
+msgid "Procuring entity approves qualifications by switching to next status:"
+msgstr "Замовник підтверджує кваліфікацію переходом до наступного статусу:"
+
+#: ../../source/tutorial.rst:196
+msgid "Confidentiality"
+msgstr "Конфіденційність"
 
 #: ../../source/tutorial.rst:338
 msgid "Procuring entity approves qualifications by switching to next status:"
@@ -428,11 +438,7 @@ msgid "You may notice 10 day stand-still time set in `qualificationPeriod`."
 msgstr ""
 "Зверніть увагу на період блокування в 10 днів під час `qualificationPeriod`."
 
-#: ../../source/tutorial.rst:199
-msgid "Confidentiality"
-msgstr "Конфіденційність"
-
-#: ../../source/tutorial.rst:236
+#: ../../source/tutorial.rst:233
 msgid ""
 "Financial, eligibility and qualification documents are also a part of Bid "
 "but are located in different end-points."
@@ -441,7 +447,7 @@ msgstr ""
 "документи також є частиною пропозиції, але зберігаються в різних точках "
 "входу."
 
-#: ../../source/tutorial.rst:215
+#: ../../source/tutorial.rst:212
 msgid ""
 "`confidentiality` field value can be either `buyerOnly` (document is "
 "private) or `public` (document is publicly accessible)."
@@ -449,7 +455,7 @@ msgstr ""
 "Значенням поля `confidentiality` може бути або `buyerOnly` - документ "
 "приватний, або `public` - документ публічно доступний."
 
-#: ../../source/tutorial.rst:219
+#: ../../source/tutorial.rst:216
 msgid ""
 "`confidentialityRationale` field is required only for private documents and "
 "should contain at least 30 characters."
@@ -458,16 +464,16 @@ msgstr ""
 "Його значенням має бути пояснення причини конфіденційності документа (не "
 "менше ніж 30 символів)."
 
-#: ../../source/tutorial.rst:221
+#: ../../source/tutorial.rst:218
 msgid "Let's mark the document as \"private\":"
 msgstr "Позначимо документ як \"приватний\":"
 
-#: ../../source/tutorial.rst:326
+#: ../../source/tutorial.rst:320
 msgid "And check that qualified bids are switched to `active`:"
 msgstr ""
 "Та перевірити, що вже кваліфіковані пропозиції переключені в стан `active`:"
 
-#: ../../source/tutorial.rst:213
+#: ../../source/tutorial.rst:210
 msgid ""
 "To define the document as \"private\" - `confidentiality` and "
 "`confidentialityRationale` fields should be set."
@@ -475,16 +481,16 @@ msgstr ""
 "Щоб зробити документ \"приватним\", потрібно встановити поля "
 "`confidentiality` та `confidentialityRationale`."
 
-#: ../../source/tutorial.rst:201
+#: ../../source/tutorial.rst:198
 msgid "Documents can be either public or private:"
 msgstr "Документи можуть бути або публічними, або приватними:"
 
-#: ../../source/tutorial.rst:203
+#: ../../source/tutorial.rst:200
 msgid ""
 "Privacy settings can be changed only for the latest version of the document."
 msgstr "Приватність документа можна змінити тільки для останньої версії."
 
-#: ../../source/tutorial.rst:204
+#: ../../source/tutorial.rst:201
 msgid ""
 "When you upload new version of the document, privacy settings are copied "
 "from the previous version."
@@ -492,7 +498,7 @@ msgstr ""
 "При завантаженні нової версії, налаштування приватності копіюються з "
 "попередньої версії документа."
 
-#: ../../source/tutorial.rst:205
+#: ../../source/tutorial.rst:202
 msgid ""
 "Privacy settings can be changed only during `tenderPeriod` (with "
 "`active.tendering` status)."
@@ -500,7 +506,7 @@ msgstr ""
 "Налаштування приватності можна міняти тільки під час періоду подання "
 "пропозицій (зі статусом `active.tendering`)."
 
-#: ../../source/tutorial.rst:206
+#: ../../source/tutorial.rst:203
 msgid ""
 "If tender has status `active.qualification` winner can upload only public "
 "documents."
@@ -508,19 +514,19 @@ msgstr ""
 "Якщо закупівля має статус `active.qualification`, переможець може "
 "завантажувати тільки публічні документи."
 
-#: ../../source/tutorial.rst:208
+#: ../../source/tutorial.rst:205
 msgid "Let's upload private document:"
 msgstr "Завантажимо приватний документ:"
 
-#: ../../source/tutorial.rst:402
+#: ../../source/tutorial.rst:398
 msgid "Uploading contract documentation"
 msgstr "Завантаження документації по угоді"
 
-#: ../../source/tutorial.rst:413
+#: ../../source/tutorial.rst:409
 msgid "Let's see the list of contract documents:"
 msgstr "Подивимось на список документів пов’язаних з угодою:"
 
-#: ../../source/tutorial.rst:425
+#: ../../source/tutorial.rst:421
 msgid ""
 "By default, document language is Ukrainian. You can can change it and set "
 "another language for the document by assigning appropriate language code to "
@@ -535,21 +541,21 @@ msgstr ""
 "`description_en`). Див. структуру даних :ref:`Document` для більш детальної "
 "інформації."
 
-#: ../../source/tutorial.rst:430
+#: ../../source/tutorial.rst:426
 msgid "Let's see the list of all added contract documents:"
 msgstr "Подивимось список усіх доданих документів угоди:"
 
-#: ../../source/tutorial.rst:404
+#: ../../source/tutorial.rst:400
 msgid "You can upload contract documents for the OpenEU procedure."
 msgstr ""
 "Ви можете завантажити документи угоди для відкритих торгів з публікацією "
 "англ. мовою."
 
-#: ../../source/tutorial.rst:406
+#: ../../source/tutorial.rst:402
 msgid "Let's upload contract document:"
 msgstr "Завантажимо документ угоди:"
 
-#: ../../source/tutorial.rst:411
+#: ../../source/tutorial.rst:407
 msgid ""
 "`201 Created` response code and `Location` header confirm that this document"
 " was added."
@@ -557,11 +563,11 @@ msgstr ""
 "Код відповіді `201 Created` та заголовок `Location` підтверджують, що "
 "документ було додано."
 
-#: ../../source/tutorial.rst:418
+#: ../../source/tutorial.rst:414
 msgid "We can upload another contract document:"
 msgstr "Можна завантажити ще один документ угоди:"
 
-#: ../../source/tutorial.rst:423
+#: ../../source/tutorial.rst:419
 msgid ""
 "`201 Created` response code and `Location` header confirm that the second "
 "document was uploaded."
@@ -569,15 +575,15 @@ msgstr ""
 "Код відповіді `201 Created` та заголовок `Location` підтверджують, що ще "
 "один документ було додано."
 
-#: ../../source/tutorial.rst:435
+#: ../../source/tutorial.rst:431
 msgid "Let's view separate contract document:"
 msgstr "Переглянемо окремий документ угоди:"
 
-#: ../../source/tutorial.rst:381
+#: ../../source/tutorial.rst:377
 msgid "`200 OK` response was returned. The value was modified successfully."
 msgstr "Було повернуто код відповіді `200 OK`. Значення змінено успішно."
 
-#: ../../source/tutorial.rst:396
+#: ../../source/tutorial.rst:392
 msgid ""
 "Setting contract validity period is optional, but if it is needed, you can "
 "set appropriate `startDate` and `endDate`."
@@ -586,11 +592,11 @@ msgstr ""
 "можете встановити відповідну дату початку `startDate` та кінця `endDate` "
 "терміну дії."
 
-#: ../../source/tutorial.rst:372
+#: ../../source/tutorial.rst:368
 msgid "Setting  contract value"
 msgstr "Встановлення вартості угоди"
 
-#: ../../source/tutorial.rst:374
+#: ../../source/tutorial.rst:370
 msgid ""
 "By default contract value is set based on the award, but there is a "
 "possibility to set custom contract value."
@@ -598,7 +604,7 @@ msgstr ""
 "За замовчуванням вартість угоди встановлюється на основі рішення про "
 "визначення переможця, але є можливість змінити це значення."
 
-#: ../../source/tutorial.rst:376
+#: ../../source/tutorial.rst:372
 msgid ""
 "If you want to **lower contract value**, you can insert new one into the "
 "`amount` field."
@@ -606,11 +612,11 @@ msgstr ""
 "Якщо ви хочете **знизити вартість угоди**, ви можете встановити нове "
 "значення для поля `amount`."
 
-#: ../../source/tutorial.rst:384
+#: ../../source/tutorial.rst:380
 msgid "Setting contract signature date"
 msgstr "Встановлення дати підписання угоди"
 
-#: ../../source/tutorial.rst:386
+#: ../../source/tutorial.rst:382
 msgid ""
 "There is a possibility to set custom contract signature date. You can insert"
 " appropriate date into the `dateSigned` field."
@@ -618,7 +624,7 @@ msgstr ""
 "Є можливість встановити дату підписання угоди. Для цього вставте відповідну "
 "дату в поле `dateSigned`."
 
-#: ../../source/tutorial.rst:388
+#: ../../source/tutorial.rst:384
 msgid ""
 "If this date is not set, it will be auto-generated on the date of contract "
 "registration."
@@ -626,19 +632,19 @@ msgstr ""
 "Якщо ви не встановите дату підписання, то вона буде згенерована автоматично "
 "під час реєстрації угоди."
 
-#: ../../source/tutorial.rst:394
+#: ../../source/tutorial.rst:390
 msgid "Setting contract validity period"
 msgstr "Встановлення терміну дії угоди"
 
-#: ../../source/tutorial.rst:467
+#: ../../source/tutorial.rst:463
 msgid "You can change ``reasonType`` value to `unsuccessful`."
 msgstr "Ви можете виправити тип на `unsuccessful` (торги не відбулися)."
 
-#: ../../source/tutorial.rst:94
+#: ../../source/tutorial.rst:93
 msgid "Procuring entity can set bid guarantee:"
 msgstr "Замовник може встановити забезпечення тендерної пропозиції"
 
-#: ../../source/tutorial.rst:465
+#: ../../source/tutorial.rst:461
 msgid ""
 "There are two possible types of cancellation reason: tender was `cancelled` "
 "or `unsuccessful`. By default ``reasonType`` value is `cancelled`."
@@ -647,7 +653,7 @@ msgstr ""
 "торги відмінені - `cancelled`, або торги не відбулися - `unsuccessful`. За "
 "замовчуванням, значення ``reasonType`` рівне `cancelled`."
 
-#: ../../source/tutorial.rst:217
+#: ../../source/tutorial.rst:214
 msgid ""
 "Content of private documents (`buyerOnly`) can be accessed only by procuring"
 " entity or by participant who uploaded them."
@@ -655,7 +661,7 @@ msgstr ""
 "Вміст приватних документів (`buyerOnly`) закритий для всіх крім замовника і "
 "учасника, який подав ці документи."
 
-#: ../../source/tutorial.rst:238
+#: ../../source/tutorial.rst:235
 msgid ""
 "In order to create and/or get financial document ``financial_documents`` "
 "end-point should be used:"
@@ -663,11 +669,11 @@ msgstr ""
 "Для того, щоб створити і/або отримати фінансові документи потрібно "
 "використати точку входу ``financial_documents``:"
 
-#: ../../source/tutorial.rst:243
+#: ../../source/tutorial.rst:240
 msgid "Get financial documents:"
 msgstr "Отримати фінансові документи:"
 
-#: ../../source/tutorial.rst:248
+#: ../../source/tutorial.rst:245
 msgid ""
 "In order to create and/or get eligibility document ``eligibility_documents``"
 " end-point should be used:"
@@ -675,7 +681,7 @@ msgstr ""
 "Для того, щоб створити і/або отримати документи, що підтверджують "
 "відповідність потрібно використати точку входу ``eligibility_documents``:"
 
-#: ../../source/tutorial.rst:253
+#: ../../source/tutorial.rst:250
 msgid ""
 "In order to create and/or get qualification document "
 "``qualification_documents`` end-point should be used:"
@@ -683,7 +689,7 @@ msgstr ""
 "Для того, щоб створити і/або отримати документи, що підтверджують "
 "кваліфікацію, потрібно використати точку входу ``qualification_documents``:"
 
-#: ../../source/tutorial.rst:259
+#: ../../source/tutorial.rst:256
 msgid ""
 "`Financial` and `qualification` documents will be publicly accessible after "
 "the auction. `Eligibility` documents will become publicly accessible "
@@ -693,11 +699,11 @@ msgstr ""
 "аукціону. Документи, `що підтверджують відповідність`, будуть публічно "
 "доступні на етапі прекваліфікації."
 
-#: ../../source/tutorial.rst:262
+#: ../../source/tutorial.rst:259
 msgid "Here is bidder proposal with all documents."
 msgstr "Пропозиція учасника зі всіма документами:"
 
-#: ../../source/tutorial.rst:267
+#: ../../source/tutorial.rst:264
 msgid ""
 "Note that financial, eligibility, and qualification documents are stored in "
 "`financialDocuments`, `eligibilityDocuments`, and `qualificationDocuments` "
@@ -708,13 +714,31 @@ msgstr ""
 "`financialDocuments` та  `qualificationDocuments` атрибутах :ref:`Bid` "
 "відповідно."
 
-#: ../../source/tutorial.rst:181
-msgid "Bidder can register a bid with `draft` status:"
+#: ../../source/tutorial.rst:337
+msgid ""
+"If qualification has been cancelled, new `Qualification` object is generated"
+" for this participant."
 msgstr ""
+"Якщо кваліфікацію було скасовано, то для учасника генерується новий об'єкт "
+"кваліфікації."
 
-#: ../../source/tutorial.rst:185
-msgid "anjd approve to pending status:"
-msgstr ""
+#: ../../source/tutorial.rst:177
+msgid "Bidder can register a bid with ``draft`` status:"
+msgstr "Учасник може зареєструвати ставку із статусом ``draft`` (чернетка):"
+
+#: ../../source/tutorial.rst:182
+msgid "and approve to ``pending`` status:"
+msgstr "і підтвердити її, перевівши у ``pending`` статус:"
+
+#~ msgid "You may notice 10 day stand-still time set in `qualificationPeriod`."
+#~ msgstr ""
+#~ "Зверніть увагу на період блокування в 10 днів під час `qualificationPeriod`."
+
+#~ msgid "<<<<<<< HEAD .. _tutorial:"
+#~ msgstr ""
+
+#~ msgid "and then approve bid by changing status to ``pending``:"
+#~ msgstr ""
 
 #: ../../source/tutorial.rst:292
 msgid "Batch-mode bid registration"
@@ -729,4 +753,3 @@ msgstr ""
 #: ../../source/tutorial.rst:177
 msgid "Bid registration"
 msgstr "Реєстрація пропозиції"
-

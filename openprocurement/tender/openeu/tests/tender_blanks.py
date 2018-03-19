@@ -10,7 +10,6 @@ from openprocurement.tender.core.constants import (
 )
 
 from openprocurement.tender.belowthreshold.tests.base import test_organization
-
 from openprocurement.tender.openeu.models import Tender
 
 # TenderTest
